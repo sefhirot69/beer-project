@@ -29,7 +29,9 @@ composer-update: ACTION=update $(module)
 
 composer-require: ACTION=require $(module)
 
-composer composer-install composer-update composer-require: create_env_file
+composer-dump: ACTION=dump-autoload
+
+composer composer-install composer-update composer-require composer-dump: create_env_file
 	$(COMPOSER) $(ACTION) \
 			--ignore-platform-reqs \
 			--no-ansi

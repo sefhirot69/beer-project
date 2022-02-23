@@ -1,6 +1,6 @@
 # VARIABLES
 DOCKER_COMPOSE = docker-compose
-CONTAINER      = container-apache
+CONTAINER      = container-beer
 EXEC           = docker exec -ti $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console

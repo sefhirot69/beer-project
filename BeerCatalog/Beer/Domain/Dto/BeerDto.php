@@ -9,24 +9,27 @@ final class BeerDto implements \JsonSerializable
     private int $id;
     private string $name;
     private string $description;
+    private ?BeerDetailsDto $details;
 
     /**
-     * @param int    $id
-     * @param string $name
-     * @param string $description
+     * @param int                 $id
+     * @param string              $name
+     * @param string              $description
+     * @param BeerDetailsDto|null $details
      */
-    public function __construct(int $id, string $name, string $description)
+    public function __construct(int $id, string $name, string $description, ?BeerDetailsDto $details = null)
     {
 
         $this->id          = $id;
         $this->name        = $name;
         $this->description = $description;
+        $this->details     = $details;
     }
 
-    public static function create(int $id, string $name, string $description): self
+    public static function create(int $id, string $name, string $description, ?BeerDetailsDto $details): self
     {
 
-        return new self($id, $name, $description);
+        return new self($id, $name, $description, $details);
     }
 
     /**
@@ -60,6 +63,15 @@ final class BeerDto implements \JsonSerializable
     {
 
         return get_object_vars($this);
+    }
+
+    /**
+     * @return BeerDetailsDto|null
+     */
+    public function getDetails(): ?BeerDetailsDto
+    {
+
+        return $this->details;
     }
 
 }

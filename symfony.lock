@@ -17,6 +17,9 @@
     "doctrine/lexer": {
         "version": "1.2.2"
     },
+    "fakerphp/faker": {
+        "version": "v1.19.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.4.1"
     },

@@ -19,7 +19,8 @@ FROM php:7.4-apache
 RUN apt-get update -qq \
     && apt-get install -yq zlib1g-dev g++ libicu-dev zip libzip-dev zip libpq-dev\
     && pecl install apcu \
-    && pecl install xdebug-3.1.2 \
+    && pecl install xdebug-3.0.3\
+    && docker-php-ext-enable xdebug \
     && docker-php-ext-enable apcu \
     && docker-php-ext-install intl opcache\
     && docker-php-ext-configure zip \

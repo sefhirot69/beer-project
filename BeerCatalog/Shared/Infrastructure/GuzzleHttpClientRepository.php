@@ -14,7 +14,7 @@ final class GuzzleHttpClientRepository implements HttpClientRepository
     /**
      * @var ClientInterface
      */
-    private $client;
+    private ClientInterface $client;
 
     public function __construct(ClientInterface $client)
     {
@@ -35,7 +35,7 @@ final class GuzzleHttpClientRepository implements HttpClientRepository
                 throw new GuzzleHttpClientException('An error has occurred');
             }
 
-            return json_decode($response->getBody()->getContents());
+            return json_decode($response->getBody()->getContents(), true);
         } catch (GuzzleException|\Exception|HttpClientException $exception) {
             throw new GuzzleHttpClientException($exception->getMessage());
         }
@@ -47,7 +47,7 @@ final class GuzzleHttpClientRepository implements HttpClientRepository
      *
      * @return array
      */
-    public function buildOptions(string $method, array $query): array
+    private function buildOptions(string $method, array $query): array
     {
 
         $options = [

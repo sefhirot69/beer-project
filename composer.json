@@ -1,4 +1,6 @@
 {
+    "name": "sefhirot69/beer-project",
+    "description": "o2o technical test",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -55,7 +57,8 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "vendor/bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"

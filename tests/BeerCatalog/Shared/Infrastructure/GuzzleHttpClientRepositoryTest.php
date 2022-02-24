@@ -4,7 +4,6 @@ namespace App\Tests\BeerCatalog\Shared\Infrastructure;
 
 use App\Tests\DataMock\HttpClientResponse;
 use BeerCatalog\Shared\Domain\Exceptions\GuzzleHttpClientException;
-use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -25,7 +24,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
      * @When call to function fetch
      * @Then should return a 200
      */
-    public function fetchShouldReturnStatusOk()
+    public function fetchShouldReturnStatusOk() : void
     {
 
         $body = Utils::streamFor(HttpClientResponse::response());
@@ -54,7 +53,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
      * @When call to function fetch
      * @Then should return an exception
      */
-    public function fetchShouldReturnToException()
+    public function fetchShouldReturnToException() : void
     {
 
         $this->expectException(GuzzleHttpClientException::class);

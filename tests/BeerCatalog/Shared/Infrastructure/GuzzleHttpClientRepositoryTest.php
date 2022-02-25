@@ -4,7 +4,7 @@ namespace App\Tests\BeerCatalog\Shared\Infrastructure;
 
 use App\Tests\DataMock\HttpClientResponse;
 use BeerCatalog\Shared\Domain\Exceptions\GuzzleHttpClientException;
-use BeerCatalog\Shared\Infrastructure\GuzzleHttpClientDataSource;
+use BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -41,7 +41,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
             ]
         );
 
-        $repository = new GuzzleHttpClientDataSource($guzzleMock);
+        $repository = new GuzzleHttpClientRepository($guzzleMock);
         $result     = $repository->fetch('GET', '/test', []);
 
         self::assertEquals(200, $result['statusCode']);
@@ -72,7 +72,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
             ]
         );
 
-        $repository = new GuzzleHttpClientDataSource($guzzleMock);
+        $repository = new GuzzleHttpClientRepository($guzzleMock);
         $repository->fetch('GET', '/test', []);
     }
 

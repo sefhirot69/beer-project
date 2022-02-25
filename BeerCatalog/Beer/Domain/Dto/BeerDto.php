@@ -26,7 +26,7 @@ final class BeerDto implements \JsonSerializable
         $this->details     = $details;
     }
 
-    public static function create(int $id, string $name, string $description, ?BeerDetailsDto $details): self
+    public static function create(int $id, string $name, string $description, ?BeerDetailsDto $details = null): self
     {
 
         return new self($id, $name, $description, $details);
@@ -59,12 +59,6 @@ final class BeerDto implements \JsonSerializable
         return $this->description;
     }
 
-    public function jsonSerialize(): array
-    {
-
-        return get_object_vars($this);
-    }
-
     /**
      * @return BeerDetailsDto|null
      */
@@ -72,6 +66,12 @@ final class BeerDto implements \JsonSerializable
     {
 
         return $this->details;
+    }
+
+    public function jsonSerialize(): array
+    {
+
+        return get_object_vars($this);
     }
 
 }

@@ -4,7 +4,7 @@ namespace BeerCatalog\Shared\Domain;
 
 use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 
-interface HttpClientRepository
+interface HttpClientDataSource
 {
     /**
      * @param string $method

@@ -4,11 +4,11 @@ namespace BeerCatalog\Shared\Infrastructure;
 
 use BeerCatalog\Shared\Domain\Exceptions\GuzzleHttpClientException;
 use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
-use BeerCatalog\Shared\Domain\HttpClientRepository;
+use BeerCatalog\Shared\Domain\HttpClientDataSource;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
-final class GuzzleHttpClientRepository implements HttpClientRepository
+final class GuzzleHttpClientDataSource implements HttpClientDataSource
 {
 
     /**

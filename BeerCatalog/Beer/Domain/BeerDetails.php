@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace BeerCatalog\Beer\Domain;
 
+use BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
+use BeerCatalog\Beer\Domain\Dto\BeerDto;
+
 final class BeerDetails
 {
     private string $imageUrl;
@@ -61,6 +64,18 @@ final class BeerDetails
     {
 
         return $this->firstBrewed;
+    }
+
+    /**
+     * @return BeerDetailsDto
+     */
+    public function mapToDto(): BeerDetailsDto
+    {
+        return BeerDetailsDto::create(
+            $this->getImageUrl(),
+            $this->getTagLine(),
+            $this->getFirstBrewed(),
+        );
     }
 
 }

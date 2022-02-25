@@ -8,7 +8,7 @@ use BeerCatalog\Shared\Domain\HttpClientDataSource;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
-final class GuzzleHttpClientDataSource implements HttpClientDataSource
+final class GuzzleHttpClientRepository implements HttpClientDataSource
 {
 
     /**

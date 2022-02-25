@@ -2,9 +2,9 @@
 
 namespace BeerCatalog\Shared\Infrastructure;
 
-use BeerCatalog\Shared\Domain\Exceptions\GuzzleHttpClientException;
 use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use BeerCatalog\Shared\Domain\HttpClientDataSource;
+use BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 

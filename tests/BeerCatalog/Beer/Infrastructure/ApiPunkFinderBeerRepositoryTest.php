@@ -4,6 +4,7 @@ namespace BeerCatalog\Tests\Beer\Infrastructure;
 
 use App\Tests\DataMock\ApiPunkResponse;
 use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
 use BeerCatalog\Beer\Domain\Dto\BeerDto;
 use BeerCatalog\Beer\Infrastructure\ApiPunkFinderBeerRepository;
 use BeerCatalog\Shared\Domain\HttpClientDataSource;
@@ -32,6 +33,7 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
     {
         //GIVEN
         $fakeResponse = json_decode(ApiPunkResponse::responseOk(), true);
+        $query = FindBeerByFoodQuery::create('a', false);
 
         //WHEN
         $this->httpClientMock
@@ -41,13 +43,60 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
         $res = new ApiPunkFinderBeerRepository($this->httpClientMock, '');
 
         //THEN
-        $result = $res->findBeerByFood(FindBeerByFoodQuery::create('a', false));
+        $result = $res->findBeerByFood($query);
 
         foreach ($result->getCatalogBeer() as $beerDto) {
-            self::assertInstanceOf(BeerDto::class,$beerDto);
+            self::assertInstanceOf(BeerDto::class, $beerDto);
             self::assertNull($beerDto->getDetails());
         }
     }
 
+    /**
+     * @test
+     */
+    public function findBeerByFoodShouldReturnCatalogBeerDtoWithDetails(): void
+    {
+        //GIVEN
+        $fakeResponse = json_decode(ApiPunkResponse::responseOk(), true);
+        $query = FindBeerByFoodQuery::create('a', true);
+
+        //WHEN
+        $this->httpClientMock
+            ->expects(self::once())
+            ->method('fetch')
+            ->willReturn($fakeResponse);
+        $res = new ApiPunkFinderBeerRepository($this->httpClientMock, '');
+
+        //THEN
+        $result = $res->findBeerByFood($query);
+
+        foreach ($result->getCatalogBeer() as $beerDto) {
+            self::assertInstanceOf(BeerDto::class, $beerDto);
+            self::assertNotNull($beerDto->getDetails());
+            self::assertInstanceOf(BeerDetailsDto::class, $beerDto->getDetails());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function findBeerByFoodShouldReturnExceptionNotFoundFood(): void
+    {
+        $this->expectException(\RuntimeException::class); //TODO poner excepcion personalizada
+
+        //GIVEN
+        $query = FindBeerByFoodQuery::create('a', false);
+        $fakeResponse = json_decode(ApiPunkResponse::responseEmpty(), true);
+
+        //WHEN
+        $this->httpClientMock
+            ->expects(self::once())
+            ->method('fetch')
+            ->willReturn($fakeResponse);
+        $res = new ApiPunkFinderBeerRepository($this->httpClientMock, '');
+
+        //THEN
+        $res->findBeerByFood($query);
+    }
 
 }

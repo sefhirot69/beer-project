@@ -3,7 +3,7 @@
 namespace App\Tests\BeerCatalog\Shared\Infrastructure;
 
 use App\Tests\DataMock\HttpClientResponse;
-use BeerCatalog\Shared\Domain\Exceptions\GuzzleHttpClientException;
+use BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -59,6 +59,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
         $this->expectException(GuzzleHttpClientException::class);
         $this->expectErrorMessage('An error has occurred');
 
+        //GIVEN
         $mock = new MockHandler(
             [
                 new Response(400, []),
@@ -72,7 +73,10 @@ class GuzzleHttpClientRepositoryTest extends TestCase
             ]
         );
 
+        //WHEN
         $repository = new GuzzleHttpClientRepository($guzzleMock);
+
+        //THEN
         $repository->fetch('GET', '/test', []);
     }
 

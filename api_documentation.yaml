@@ -16,7 +16,7 @@ paths:
       parameters:
         - name: food
           in: query
-          description: ''
+          description: 'Devuelve todas las cervezas que coinciden con la cadena de comida suministrada, esto realiza una coincidencia aproximada.'
           required: true
           style: form
           explode: true
@@ -33,7 +33,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Beer'
         '404':
-          description: Beer Not Found
+          description: Not Found
         '400':
           description: Error Validation
         '500':
@@ -48,7 +48,7 @@ paths:
       parameters:
         - name: food
           in: query
-          description: ''
+          description: 'Devuelve todas las cervezas que coinciden con la cadena de comida suministrada, esto realiza una coincidencia aproximada.'
           required: true
           style: form
           explode: true
@@ -65,7 +65,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/BeerWithDetail'
         '404':
-          description: Beer Not Found
+          description: Not Found
         '400':
           description: Error Validation
         '500':

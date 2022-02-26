@@ -11,9 +11,11 @@ COMPOSER       = $(EXEC) composer
 deploy: build
 	@echo "📦 Build done"
 
-build: create_env_file recreate update-deps
+build: create_env_file recreate install-deps test
 
-update-deps: composer-install
+install-deps: composer-install
+
+update-deps: composer-update
 
 test:
 	$(EXEC_PHP) ./vendor/bin/phpunit

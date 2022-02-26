@@ -1,0 +1,74 @@
+{
+  "info": {
+    "_postman_id": "345141fc-a24b-43ae-aa81-3a917e5c639e",
+    "name": "Api Punk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Catalog Beer",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "http://localhost:8081/beer?food=pina",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "beer"
+          ],
+          "query": [
+            {
+              "key": "food",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Catalog Beer Detail",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "http://localhost:8081/beer/detail?food=apple",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "beer",
+            "detail"
+          ],
+          "query": [
+            {
+              "key": "food",
+              "value": "apple"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

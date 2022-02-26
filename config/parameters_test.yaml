@@ -1,2 +1,0 @@
-parameters:
-  api.punk.base.url: '%env(API_PUNK_BASE_URL)%'

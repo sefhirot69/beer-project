@@ -99,4 +99,25 @@ final class FindBeerByFoodControllerTest extends TestCase
         self::assertJson($result->getContent());
     }
 
+    /**
+     * @test
+     * @given
+     * @when
+     * @then
+     */
+    public function mustReturnAnErrorWithInvalidArgumentException() : void
+    {
+        //GIVEN
+
+
+        //WHEN
+        $controller = new FindBeerByFoodController($this->handlerMock);
+
+        //THEN
+        $result = $controller(new Request(['fod' => 'a']));
+
+        self::assertEquals(400, $result->getStatusCode());
+        self::assertJson($result->getContent());
+    }
+
 }

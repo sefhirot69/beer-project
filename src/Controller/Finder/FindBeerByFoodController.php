@@ -34,12 +34,28 @@ final class FindBeerByFoodController extends AbstractController
     {
         try {
             $foodFilter = $request->query->get('food');
+
+            $this->checkArgument($foodFilter);
+
             $catalog = ($this->findBeerByFoodQueryHandler)(FindBeerByFoodQuery::create($foodFilter));
             return new JsonResponse($catalog->getCatalogBeer(), Response::HTTP_OK);
-        } catch (BeersNotFoundException | HttpClientException $exception) {
+        } catch (BeersNotFoundException | HttpClientException | \InvalidArgumentException $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
-        } catch (\Exception|\TypeError $exception) {
+        } catch (\Exception | \TypeError $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @param $foodFilter
+     */
+    private function checkArgument($foodFilter): void
+    {
+        if (!$foodFilter) {
+            throw new \InvalidArgumentException(
+                'Argument `food` is required',
+                Response::HTTP_BAD_REQUEST
+            );
         }
     }
 }

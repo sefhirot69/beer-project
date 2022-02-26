@@ -4,7 +4,7 @@ namespace App\Tests\Unitary\BeerCatalog\Beer\Infrastructure;
 
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
-use App\Tests\DataMock\ApiPunkResponse;
+use App\Tests\Shared\DataMock\ApiPunkResponse;
 use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
 use App\BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
 use App\BeerCatalog\Beer\Domain\Dto\BeerDto;

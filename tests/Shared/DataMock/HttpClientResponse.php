@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\DataMock;
+namespace App\Tests\Shared\DataMock;
 
 final class HttpClientResponse
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Controller\Finder;
 
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
-use App\Tests\DataMock\ApiPunkResponse;
+use App\Tests\Shared\DataMock\ApiPunkResponse;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class FindBeerByFoodWithDetailControllerFunctionalTest extends WebTestCase

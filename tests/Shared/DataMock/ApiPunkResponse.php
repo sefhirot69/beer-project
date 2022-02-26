@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\Tests\DataMock;
+namespace App\Tests\Shared\DataMock;
 
 final class ApiPunkResponse
 {

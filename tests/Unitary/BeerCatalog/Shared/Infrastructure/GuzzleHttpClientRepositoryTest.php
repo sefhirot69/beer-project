@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unitary\BeerCatalog\Shared\Infrastructure;
 
-use App\Tests\DataMock\HttpClientResponse;
+use App\Tests\Shared\DataMock\HttpClientResponse;
 use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use GuzzleHttp\Client;

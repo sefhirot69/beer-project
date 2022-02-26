@@ -15,11 +15,13 @@
 
 ### 🔥 Ejecutar aplicación
 
-Escribe por terminal el comando `make`. Este comando instalara todo lo necesario para arrancar la aplicación.
-
-Si no tenéis el comando `make`, ejecuta `docker-compose up -d` y luego instala las dependencias dentro del contenedor generado `composer install`.
-
-Podéis probar la aplicación en [beer_project](http://localhost:8081)
+1. Escribe por terminal el comando `make`. Este comando instalara todo lo necesario para arrancar la aplicación.
+   1. ***Opcional*** - Si no tenéis el comando `make`, ejecuta `docker-compose up -d` y luego instala las dependencias dentro del contenedor generado `composer install`.
+2. Tienes 3 urls disponibles:
+   1. App - http://localhost:8081
+   2. Swagger API - http://localhost:8080
+      1. ***Opcional*** - Puedes importar el fichero raíz `api_documentation.postman_collection.json` a tu aplicación de **Postman**, para ver los endpoints disponibles.
+   3. Swagger Editor - http://localhost:8082
 
 ### ✅ Ejecución de Tests
 
@@ -41,58 +43,81 @@ Podéis probar la aplicación en [beer_project](http://localhost:8081)
 ### 🌳 Estructura de la app
 
 ```
-├── Beer
-│   ├── Application
-│   │   └── Find
-│   │       ├── FindBeerByFoodQueryHandler.php
-│   │       └── Query
-│   │           └── FindBeerByFoodQuery.php
-│   ├── Domain
-│   │   ├── Beer.php
-│   │   ├── BeerDetails.php
-│   │   ├── CatalogBeer.php
-│   │   ├── DataSource
-│   │   │   └── FinderBeerDataSource.php
-│   │   └── Dto
-│   │       ├── BeerDetailsDto.php
-│   │       ├── BeerDto.php
-│   │       └── CatalogBeerDto.php
-│   └── Infrastructure
-│       └── ApiPunkFinderBeerRepository.php
-└── Shared
-    ├── Domain
-    │   ├── Exceptions
-    │   │   └── HttpClientException.php
-    │   └── HttpClientDataSource.php
-    └── Infrastructure
-        ├── Exceptions
-        │   └── GuzzleHttpClientException.php
-        └── GuzzleHttpClientRepository.php
+.
+├── BeerCatalog
+│   ├── Beer
+│   │   ├── Application
+│   │   │   └── Find
+│   │   │       ├── FindBeerByFoodQueryHandler.php
+│   │   │       ├── FindBeerByFoodQueryHandlerInterface.php
+│   │   │       └── Query
+│   │   │           └── FindBeerByFoodQuery.php
+│   │   ├── Domain
+│   │   │   ├── Beer.php
+│   │   │   ├── BeerDetails.php
+│   │   │   ├── CatalogBeer.php
+│   │   │   ├── DataSource
+│   │   │   │   └── FinderBeerDataSource.php
+│   │   │   ├── Dto
+│   │   │   │   ├── BeerDetailsDto.php
+│   │   │   │   ├── BeerDto.php
+│   │   │   │   └── CatalogBeerDto.php
+│   │   │   └── Exceptions
+│   │   │       └── BeersNotFoundException.php
+│   │   └── Infrastructure
+│   │       └── ApiPunkFinderBeerRepository.php
+│   └── Shared
+│       ├── Domain
+│       │   ├── Exceptions
+│       │   │   └── HttpClientException.php
+│       │   └── HttpClientDataSource.php
+│       └── Infrastructure
+│           ├── Exceptions
+│           │   └── GuzzleHttpClientException.php
+│           └── GuzzleHttpClientRepository.php
+├── Controller
+│   ├── Finder
+│   │   ├── FindBeerByFoodController.php
+│   │   └── FindBeerByFoodWithDetailController.php
+│   └── HealthCheck.php
+└── Kernel.php
+
 ```
 
 ### ✅  Estructura de los test
 
 ```
-├── BeerCatalog
-│   ├── Beer
-│   │   ├── Application
-│   │   │   └── Find
-│   │   │       └── FindBeerByFoodQueryHandlerTest.php
-│   │   ├── Domain
-│   │   │   ├── BeerDetailsMother.php
-│   │   │   ├── BeerMother.php
-│   │   │   └── CatalogBeerMother.php
-│   │   └── Infrastructure
-│   │       └── ApiPunkFinderBeerRepositoryTest.php
-│   └── Shared
-│       └── Infrastructure
-│           └── GuzzleHttpClientRepositoryTest.php
-├── DataMock
-│   ├── ApiPunkResponse.php
-│   └── HttpClientResponse.php
+.
+├── Functional
+│   └── Controller
+│       └── Finder
+│           ├── FindBeerByFoodControllerFunctionalTest.php
+│           └── FindBeerByFoodWithDetailControllerFunctionalTest.php
 ├── Shared
+│   ├── DataMock
+│   │   ├── ApiPunkResponse.php
+│   │   └── HttpClientResponse.php
 │   └── ObjectMother
 │       └── MotherCreator.php
+├── Unitary
+│   ├── BeerCatalog
+│   │   ├── Beer
+│   │   │   ├── Application
+│   │   │   │   └── Find
+│   │   │   │       └── FindBeerByFoodQueryHandlerTest.php
+│   │   │   ├── Domain
+│   │   │   │   ├── BeerDetailsMother.php
+│   │   │   │   ├── BeerMother.php
+│   │   │   │   └── CatalogBeerMother.php
+│   │   │   └── Infrastructure
+│   │   │       └── ApiPunkFinderBeerRepositoryTest.php
+│   │   └── Shared
+│   │       └── Infrastructure
+│   │           └── GuzzleHttpClientRepositoryTest.php
+│   └── Controller
+│       └── Finder
+│           ├── FindBeerByFoodControllerTest.php
+│           └── FindBeerByFoodWithDetailControllerTest.php
 └── bootstrap.php
 
 ```

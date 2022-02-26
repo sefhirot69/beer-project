@@ -38,7 +38,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
             'GET',
             $endpoint,
             [
-                'food' => '_' . $query->getFoodFilter()
+                'food' => $query->getFoodFilter().'_'
             ]
         );
 

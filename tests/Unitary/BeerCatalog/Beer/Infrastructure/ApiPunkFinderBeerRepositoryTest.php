@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\BeerCatalog\Beer\Infrastructure;
+namespace App\Tests\Unitary\BeerCatalog\Beer\Infrastructure;
 
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;

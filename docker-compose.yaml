@@ -14,6 +14,24 @@ services:
       - "8081:80"
     volumes:
       - .:/var/www/html
-  
+  swagger-ui:
+    container_name: swagger-ui
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api_documentation.yaml:/api_documentation.yaml
+    environment:
+      SWAGGER_JSON: /api_documentation.yaml
+  swagger-editor:
+    container_name: swagger-editor
+    image: swaggerapi/swagger-editor
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./api_documentation.yaml:/api_documentation.yaml
+    environment:
+      SWAGGER_FILE: /api_documentation.yaml
+
 volumes:
   data:

@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Catálogo de Cervezas
+  contact: {}
+  version: '1.0'
+servers:
+  - url: http://localhost:8081
+    variables: {}
+paths:
+  /beer:
+    get:
+      tags:
+        - Catalog Beer
+      summary: Catalog Beer
+      operationId: CatalogBeer
+      parameters:
+        - name: food
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: apple
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Beer'
+        '404':
+          description: Beer Not Found
+        '400':
+          description: Error Validation
+        '500':
+          description: Internal Server Error
+      deprecated: false
+  /beer/detail:
+    get:
+      tags:
+        - Catalog Beer
+      summary: Catalog Beer With Details
+      operationId: CatalogBeerWithDetail
+      parameters:
+        - name: food
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: crusss
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BeerWithDetail'
+        '404':
+          description: Beer Not Found
+        '400':
+          description: Error Validation
+        '500':
+          description: Internal Server Error
+      deprecated: false
+components:
+  schemas:
+    Beer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        detail:
+          type: object
+          nullable: true
+    BeerWithDetail:
+      allOf:
+        - $ref: '#/components/schemas/Beer'
+        - type: object
+          properties:
+            detail:
+              type: object
+              properties:
+                imageUrl:
+                  type: string
+                  nullable: true
+                tagLine:
+                  type: string
+                firstBrewed:
+                  type: string
+
+tags:
+  - name: Catalog Beer
+    description: 'Catálogo de cervezas'

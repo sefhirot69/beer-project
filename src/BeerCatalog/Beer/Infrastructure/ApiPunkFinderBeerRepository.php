@@ -63,7 +63,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
                     $beer['id'],
                     $beer['name'],
                     $beer['description'],
-                    BeerDetails::create($beer['image_url'], $beer['tagline'], $beer['first_brewed']),
+                    BeerDetails::create($beer['tagline'], $beer['first_brewed'], $beer['image_url']),
                 );
             }, $resultBeers);
         }

@@ -4,47 +4,42 @@ declare(strict_types=1);
 
 namespace App\BeerCatalog\Beer\Domain\Dto;
 
-use App\BeerCatalog\Beer\Domain\BeerDetails;
-use JetBrains\PhpStorm\Internal\TentativeType;
 
 final class BeerDetailsDto implements \JsonSerializable
 {
-    private string $imageUrl;
+    private ?string $imageUrl;
     private string $tagLine;
     private string $firstBrewed;
 
     /**
-     * @param string $imageUrl
      * @param string $tagLine
      * @param string $firstBrewed
+     * @param string|null $imageUrl
      */
-    public function __construct(string $imageUrl, string $tagLine, string $firstBrewed)
+    public function __construct(string $tagLine, string $firstBrewed, ?string $imageUrl = null)
     {
-
-        $this->imageUrl    = $imageUrl;
-        $this->tagLine     = $tagLine;
+        $this->imageUrl = $imageUrl;
+        $this->tagLine = $tagLine;
         $this->firstBrewed = $firstBrewed;
     }
 
     /**
-     * @param string $imageUrl
      * @param string $tagLine
      * @param string $firstBrewed
      *
+     * @param string|null $imageUrl
      * @return static
      */
-    public static function create(string $imageUrl, string $tagLine, string $firstBrewed): self
+    public static function create(string $tagLine, string $firstBrewed, ?string $imageUrl = null): self
     {
-
-        return new self($imageUrl, $tagLine, $firstBrewed);
+        return new self($tagLine, $firstBrewed, $imageUrl);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-
         return $this->imageUrl;
     }
 
@@ -53,7 +48,6 @@ final class BeerDetailsDto implements \JsonSerializable
      */
     public function getTagLine(): string
     {
-
         return $this->tagLine;
     }
 
@@ -62,13 +56,11 @@ final class BeerDetailsDto implements \JsonSerializable
      */
     public function getFirstBrewed(): string
     {
-
         return $this->firstBrewed;
     }
 
     public function jsonSerialize(): array
     {
-
         return get_object_vars($this);
     }
 

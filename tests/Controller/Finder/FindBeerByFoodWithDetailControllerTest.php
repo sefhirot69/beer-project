@@ -1,18 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Tests\Controller\Finder;
 
 use App\BeerCatalog\Beer\Application\Find\FindBeerByFoodQueryHandlerInterface;
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\Controller\Finder\FindBeerByFoodController;
+use App\Controller\Finder\FindBeerByFoodWithDetailController;
 use App\Tests\BeerCatalog\Beer\Domain\CatalogBeerMother;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-final class FindBeerByFoodControllerTest extends TestCase
+final class FindBeerByFoodWithDetailControllerTest extends TestCase
 {
     private $handlerMock;
 
@@ -27,16 +26,16 @@ final class FindBeerByFoodControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAValidJsonWithCatalogBeer() : void
+    public function mustReturnAValidJsonWithCatalogBeerWithDetail() : void
     {
         //GIVEN
-        $catalogFake = CatalogBeerMother::randomBeer()->mapToDto();
+        $catalogFake = CatalogBeerMother::randomBeerWithDetail()->mapToDto();
         $this->handlerMock->expects(self::once())
             ->method('__invoke')
             ->willReturn($catalogFake);
 
         //WHEN
-        $controller = new FindBeerByFoodController($this->handlerMock);
+        $controller = new FindBeerByFoodWithDetailController($this->handlerMock);
 
         //THEN
         $result = $controller(new Request(['food' => 'a']));
@@ -65,7 +64,7 @@ final class FindBeerByFoodControllerTest extends TestCase
             ->willThrowException($exception);
 
         //WHEN
-        $controller = new FindBeerByFoodController($this->handlerMock);
+        $controller = new FindBeerByFoodWithDetailController($this->handlerMock);
 
         //THEN
         $result = $controller(new Request(['food' => 'a']));
@@ -90,7 +89,7 @@ final class FindBeerByFoodControllerTest extends TestCase
             ->willThrowException($exception);
 
         //WHEN
-        $controller = new FindBeerByFoodController($this->handlerMock);
+        $controller = new FindBeerByFoodWithDetailController($this->handlerMock);
 
         //THEN
         $result = $controller(new Request(['food' => 'a']));
@@ -111,7 +110,7 @@ final class FindBeerByFoodControllerTest extends TestCase
 
 
         //WHEN
-        $controller = new FindBeerByFoodController($this->handlerMock);
+        $controller = new FindBeerByFoodWithDetailController($this->handlerMock);
 
         //THEN
         $result = $controller(new Request(['fod' => 'a']));
@@ -119,5 +118,4 @@ final class FindBeerByFoodControllerTest extends TestCase
         self::assertEquals(400, $result->getStatusCode());
         self::assertJson($result->getContent());
     }
-
 }

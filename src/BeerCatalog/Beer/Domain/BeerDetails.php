@@ -9,16 +9,16 @@ use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
 
 final class BeerDetails
 {
-    private string $imageUrl;
+    private ?string $imageUrl;
     private string $tagLine;
     private string $firstBrewed;
 
     /**
-     * @param string $imageUrl
      * @param string $tagLine
      * @param string $firstBrewed
+     * @param string|null $imageUrl
      */
-    public function __construct(string $imageUrl, string $tagLine, string $firstBrewed)
+    public function __construct(string $tagLine, string $firstBrewed, ?string $imageUrl = null)
     {
 
         $this->imageUrl    = $imageUrl;
@@ -27,22 +27,22 @@ final class BeerDetails
     }
 
     /**
-     * @param string $imageUrl
      * @param string $tagLine
      * @param string $firstBrewed
      *
+     * @param string|null $imageUrl
      * @return static
      */
-    public static function create(string $imageUrl, string $tagLine, string $firstBrewed): self
+    public static function create(string $tagLine, string $firstBrewed, ?string $imageUrl = null): self
     {
 
-        return new self($imageUrl, $tagLine, $firstBrewed);
+        return new self($tagLine, $firstBrewed, $imageUrl);
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
 
         return $this->imageUrl;
@@ -72,9 +72,9 @@ final class BeerDetails
     public function mapToDto(): BeerDetailsDto
     {
         return BeerDetailsDto::create(
-            $this->getImageUrl(),
             $this->getTagLine(),
             $this->getFirstBrewed(),
+            $this->getImageUrl()
         );
     }
 

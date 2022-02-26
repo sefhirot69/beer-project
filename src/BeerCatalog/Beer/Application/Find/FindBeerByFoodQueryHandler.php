@@ -9,7 +9,7 @@ use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
 use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
 use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
 
-class FindBeerByFoodQueryHandler
+final class FindBeerByFoodQueryHandler implements FindBeerByFoodQueryHandlerInterface
 {
 
     private FinderBeerDataSource $finderBeerDataSource;

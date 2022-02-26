@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Controller\Finder;
 
 use App\BeerCatalog\Beer\Application\Find\FindBeerByFoodQueryHandlerInterface;
+use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
+use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\Controller\Finder\FindBeerByFoodController;
 use App\Tests\BeerCatalog\Beer\Domain\CatalogBeerMother;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +23,9 @@ final class FindBeerByFoodControllerTest extends TestCase
 
     /**
      * @test
-     *
+     * @given
+     * @when
+     * @then
      */
     public function mustReturnAValidJsonWithCatalogBeer() : void
     {
@@ -35,7 +39,7 @@ final class FindBeerByFoodControllerTest extends TestCase
         $controller = new FindBeerByFoodController($this->handlerMock);
 
         //THEN
-        $result = $controller(new Request());
+        $result = $controller(new Request(['food' => 'a']));
 
         self::assertEquals(200, $result->getStatusCode());
         self::assertJson($result->getContent());
@@ -43,6 +47,56 @@ final class FindBeerByFoodControllerTest extends TestCase
             json_encode($catalogFake->getCatalogBeer()),
             filter_var($result->getContent(), FILTER_DEFAULT)
         );
+    }
+
+    /**
+     * @test
+     * @given
+     * @when
+     * @then
+     */
+    public function mustReturnAnErrorWithStatusCode404() : void
+    {
+        //GIVEN
+        $filterFood = 'a';
+        $exception = new BeersNotFoundException($filterFood);
+        $this->handlerMock->expects(self::once())
+            ->method('__invoke')
+            ->willThrowException($exception);
+
+        //WHEN
+        $controller = new FindBeerByFoodController($this->handlerMock);
+
+        //THEN
+        $result = $controller(new Request(['food' => 'a']));
+
+        self::assertEquals(404, $result->getStatusCode());
+        self::assertJson($result->getContent());
+    }
+
+    /**
+     * @test
+     * @given
+     * @when
+     * @then
+     */
+    public function mustReturnAnErrorWithStatusCode400() : void
+    {
+        //GIVEN
+        $error = 'An error occurred';
+        $exception = new HttpClientException($error);
+        $this->handlerMock->expects(self::once())
+            ->method('__invoke')
+            ->willThrowException($exception);
+
+        //WHEN
+        $controller = new FindBeerByFoodController($this->handlerMock);
+
+        //THEN
+        $result = $controller(new Request(['food' => 'a']));
+
+        self::assertEquals(400, $result->getStatusCode());
+        self::assertJson($result->getContent());
     }
 
 }

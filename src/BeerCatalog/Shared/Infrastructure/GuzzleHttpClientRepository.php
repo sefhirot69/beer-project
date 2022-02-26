@@ -6,7 +6,6 @@ use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
 final class GuzzleHttpClientRepository implements HttpClientDataSource
@@ -19,7 +18,6 @@ final class GuzzleHttpClientRepository implements HttpClientDataSource
 
     public function __construct(Client $client)
     {
-
         $this->client = $client;
     }
 
@@ -28,29 +26,27 @@ final class GuzzleHttpClientRepository implements HttpClientDataSource
      */
     public function fetch(string $method, string $endpoint, array $query): array
     {
-
         try {
-            $options  = $this->buildOptions($method, $query);
+            $options = $this->buildOptions($method, $query);
             $response = $this->client->request($method, $endpoint, $options);
-            if ($response->getStatusCode() != 200) {
+            if ($response->getStatusCode() !== 200) {
                 throw new GuzzleHttpClientException('An error has occurred');
             }
 
-            return json_decode($response->getBody()->getContents(), true);
-        } catch (GuzzleException|\Exception|HttpClientException $exception) {
+            return json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (GuzzleException | \Exception | HttpClientException $exception) {
             throw new GuzzleHttpClientException($exception->getMessage());
         }
     }
 
     /**
      * @param string $method
-     * @param array  $query
+     * @param array $query
      *
      * @return array
      */
     private function buildOptions(string $method, array $query): array
     {
-
         $options = [
             'http_errors' => false,
         ];

@@ -11,7 +11,7 @@ use App\BeerCatalog\Beer\Domain\BeerDetails;
 use App\BeerCatalog\Beer\Domain\CatalogBeer;
 use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
 use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
-use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
+use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 
 final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
@@ -29,9 +29,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
     }
 
     /**
-     * @param FindBeerByFoodQuery $query
-     * @return CatalogBeerDto
-     * @throws HttpClientException
+     * @inheritDoc
      */
     public function findBeerByFood(FindBeerByFoodQuery $query): CatalogBeerDto
     {
@@ -45,7 +43,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
         );
 
         if (empty($resultBeers)) {
-            throw new \RuntimeException('Not Found');
+            throw new BeersNotFoundException($query->getFoodFilter());
         }
 
         return CatalogBeer::create($this->buildBeers($resultBeers, $query->isWithDetail()))->mapToDto();

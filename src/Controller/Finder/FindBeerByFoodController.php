@@ -47,6 +47,25 @@ final class FindBeerByFoodController extends AbstractController
     }
 
     /**
+     * @Route("/beer/detail", name="app_find_beer", methods={"GET"})
+     */
+    public function getWithDetail(Request $request): JsonResponse
+    {
+        try {
+            $foodFilter = $request->query->get('food');
+
+            $this->checkArgument($foodFilter);
+
+            $catalog = ($this->findBeerByFoodQueryHandler)(FindBeerByFoodQuery::create($foodFilter, true));
+            return new JsonResponse($catalog->getCatalogBeer(), Response::HTTP_OK);
+        } catch (BeersNotFoundException | HttpClientException | \InvalidArgumentException $exception) {
+            return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
+        } catch (\Exception | \TypeError $exception) {
+            return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * @param $foodFilter
      */
     private function checkArgument($foodFilter): void

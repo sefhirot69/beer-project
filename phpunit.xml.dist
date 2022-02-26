@@ -19,10 +19,10 @@
 
     <testsuites>
         <testsuite name="Unitary">
-            <directory>tests</directory>
+            <directory>tests/Unitary</directory>
         </testsuite>
-        <testsuite name="BeerCatalog">
-            <directory>tests</directory>
+        <testsuite name="Functional">
+            <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
 

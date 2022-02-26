@@ -1,0 +1,6 @@
+framework:
+    test: true
+services:
+
+    App\BeerCatalog\Shared\Domain\HttpClientDataSource:
+        public: true

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Tests\Beer\Domain;
+namespace App\Tests\BeerCatalog\Beer\Domain;
 
 use App\Tests\Shared\ObjectMother\MotherCreator;
-use BeerCatalog\Beer\Domain\Beer;
-use BeerCatalog\Beer\Domain\BeerDetails;
+use App\BeerCatalog\Beer\Domain\Beer;
+use App\BeerCatalog\Beer\Domain\BeerDetails;
 
 final class BeerMother
 {

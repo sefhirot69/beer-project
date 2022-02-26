@@ -1,13 +1,15 @@
 <?php
 
-namespace BeerCatalog\Tests\Beer\Infrastructure;
+namespace App\Tests\BeerCatalog\Beer\Infrastructure;
 
+use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
+use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\Tests\DataMock\ApiPunkResponse;
-use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
-use BeerCatalog\Beer\Domain\Dto\BeerDto;
-use BeerCatalog\Beer\Infrastructure\ApiPunkFinderBeerRepository;
-use BeerCatalog\Shared\Domain\HttpClientDataSource;
+use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use App\BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
+use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
+use App\BeerCatalog\Beer\Infrastructure\ApiPunkFinderBeerRepository;
+use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -53,6 +55,9 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
 
     /**
      * @test
+     * @given
+     * @when
+     * @then
      */
     public function findBeerByFoodShouldReturnCatalogBeerDtoWithDetails(): void
     {
@@ -79,10 +84,14 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
 
     /**
      * @test
+     * @given
+     * @when
+     * @then
      */
     public function findBeerByFoodShouldReturnExceptionNotFoundFood(): void
     {
-        $this->expectException(\RuntimeException::class); //TODO poner excepcion personalizada
+        $this->expectException(BeersNotFoundException::class);
+        $this->expectExceptionCode(404);
 
         //GIVEN
         $query = FindBeerByFoodQuery::create('a', false);
@@ -93,6 +102,34 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
             ->expects(self::once())
             ->method('fetch')
             ->willReturn($fakeResponse);
+        $res = new ApiPunkFinderBeerRepository($this->httpClientMock, '');
+
+        //THEN
+        $res->findBeerByFood($query);
+    }
+
+
+    /**
+     * @test
+     * @given
+     * @when
+     * @then
+     */
+    public function findBeerByFoodShouldReturnExceptionHttpClient(): void
+    {
+        //GIVEN
+        $messageError = 'An error occur';
+        $exceptionHttp = new HttpClientException($messageError);
+        $query = FindBeerByFoodQuery::create('a', false);
+
+        $this->expectException(HttpClientException::class);
+        $this->expectExceptionCode(400);
+
+        //WHEN
+        $this->httpClientMock
+            ->expects(self::once())
+            ->method('fetch')
+            ->willThrowException($exceptionHttp);
         $res = new ApiPunkFinderBeerRepository($this->httpClientMock, '');
 
         //THEN

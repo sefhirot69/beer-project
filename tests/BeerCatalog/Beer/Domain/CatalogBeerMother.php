@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Tests\Beer\Domain;
+namespace App\Tests\BeerCatalog\Beer\Domain;
 
-use BeerCatalog\Beer\Domain\CatalogBeer;
+use App\BeerCatalog\Beer\Domain\CatalogBeer;
 
 final class CatalogBeerMother
 {

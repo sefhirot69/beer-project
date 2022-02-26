@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Tests\Beer\Application\Find;
+namespace App\Tests\BeerCatalog\Beer\Application\Find;
 
-use BeerCatalog\Beer\Application\Find\FindBeerByFoodQueryHandler;
-use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
-use BeerCatalog\Tests\Beer\Domain\CatalogBeerMother;
+use App\BeerCatalog\Beer\Application\Find\FindBeerByFoodQueryHandler;
+use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
+use App\Tests\BeerCatalog\Beer\Domain\CatalogBeerMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

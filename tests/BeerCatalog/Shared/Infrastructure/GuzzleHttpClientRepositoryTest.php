@@ -3,8 +3,8 @@
 namespace App\Tests\BeerCatalog\Shared\Infrastructure;
 
 use App\Tests\DataMock\HttpClientResponse;
-use BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
-use BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
+use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
+use App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

@@ -1,10 +1,11 @@
 <?php
 
-namespace BeerCatalog\Shared\Infrastructure;
+namespace App\BeerCatalog\Shared\Infrastructure;
 
-use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
-use BeerCatalog\Shared\Domain\HttpClientDataSource;
-use BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
+use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
+use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
+use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -12,11 +13,11 @@ final class GuzzleHttpClientRepository implements HttpClientDataSource
 {
 
     /**
-     * @var ClientInterface
+     * @var Client
      */
-    private ClientInterface $client;
+    private Client $client;
 
-    public function __construct(ClientInterface $client)
+    public function __construct(Client $client)
     {
 
         $this->client = $client;

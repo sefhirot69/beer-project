@@ -1,13 +1,13 @@
 <?php
 
-namespace BeerCatalog\Tests\Beer\Infrastructure;
+namespace App\Test\BeerCatalog\Beer\Infrastructure;
 
 use App\Tests\DataMock\ApiPunkResponse;
-use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
-use BeerCatalog\Beer\Domain\Dto\BeerDto;
-use BeerCatalog\Beer\Infrastructure\ApiPunkFinderBeerRepository;
-use BeerCatalog\Shared\Domain\HttpClientDataSource;
+use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use App\BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
+use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
+use App\BeerCatalog\Beer\Infrastructure\ApiPunkFinderBeerRepository;
+use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

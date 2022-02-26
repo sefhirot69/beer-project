@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Beer\Domain;
+namespace App\BeerCatalog\Beer\Domain;
 
-use BeerCatalog\Beer\Domain\Dto\BeerDto;
+use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
 
 final class Beer
 {

@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 
-namespace BeerCatalog\Beer\Infrastructure;
+namespace App\BeerCatalog\Beer\Infrastructure;
 
-use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use BeerCatalog\Beer\Domain\Beer;
-use BeerCatalog\Beer\Domain\BeerDetails;
-use BeerCatalog\Beer\Domain\CatalogBeer;
-use BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
-use BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
-use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
-use BeerCatalog\Shared\Domain\HttpClientDataSource;
+use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use App\BeerCatalog\Beer\Domain\Beer;
+use App\BeerCatalog\Beer\Domain\BeerDetails;
+use App\BeerCatalog\Beer\Domain\CatalogBeer;
+use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
+use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
+use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
+use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 
 final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
 {

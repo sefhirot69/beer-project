@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Beer\Domain;
+namespace App\BeerCatalog\Beer\Domain\Dto;
 
-use BeerCatalog\Beer\Domain\Dto\BeerDetailsDto;
-use BeerCatalog\Beer\Domain\Dto\BeerDto;
+use App\BeerCatalog\Beer\Domain\BeerDetails;
+use JetBrains\PhpStorm\Internal\TentativeType;
 
-final class BeerDetails
+final class BeerDetailsDto implements \JsonSerializable
 {
     private string $imageUrl;
     private string $tagLine;
@@ -66,16 +66,10 @@ final class BeerDetails
         return $this->firstBrewed;
     }
 
-    /**
-     * @return BeerDetailsDto
-     */
-    public function mapToDto(): BeerDetailsDto
+    public function jsonSerialize(): array
     {
-        return BeerDetailsDto::create(
-            $this->getImageUrl(),
-            $this->getTagLine(),
-            $this->getFirstBrewed(),
-        );
+
+        return get_object_vars($this);
     }
 
 }

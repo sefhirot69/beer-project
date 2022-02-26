@@ -1,6 +1,6 @@
 <?php
 
-namespace BeerCatalog\Shared\Domain\Exceptions;
+namespace App\BeerCatalog\Shared\Domain\Exceptions;
 
 use Exception;
 

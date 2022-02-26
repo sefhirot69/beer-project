@@ -1,8 +1,8 @@
 <?php
 
-namespace BeerCatalog\Shared\Domain;
+namespace App\BeerCatalog\Shared\Domain;
 
-use BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
+use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 
 interface HttpClientDataSource
 {

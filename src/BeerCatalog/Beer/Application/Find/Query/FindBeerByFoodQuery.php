@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace BeerCatalog\Beer\Application\Find\Query;
+namespace App\BeerCatalog\Beer\Application\Find\Query;
 
 final class FindBeerByFoodQuery
 {

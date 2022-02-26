@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 
-namespace BeerCatalog\Beer\Application\Find;
+namespace App\BeerCatalog\Beer\Application\Find;
 
-use BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
-use BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
+use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
+use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
+use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
 
-final class FindBeerByFoodQueryHandler
+class FindBeerByFoodQueryHandler
 {
 
     private FinderBeerDataSource $finderBeerDataSource;

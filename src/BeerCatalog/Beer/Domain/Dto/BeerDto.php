@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BeerCatalog\Beer\Domain\Dto;
+namespace App\BeerCatalog\Beer\Domain\Dto;
 
 final class BeerDto implements \JsonSerializable
 {

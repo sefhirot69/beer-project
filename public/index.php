@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
+header('Access-Control-Allow-Origin: *');
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
 

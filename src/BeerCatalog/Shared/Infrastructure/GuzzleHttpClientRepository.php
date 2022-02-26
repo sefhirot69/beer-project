@@ -2,7 +2,6 @@
 
 namespace App\BeerCatalog\Shared\Infrastructure;
 
-use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use GuzzleHttp\Client;
@@ -34,7 +33,7 @@ final class GuzzleHttpClientRepository implements HttpClientDataSource
             }
 
             return json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (GuzzleException | \Exception | HttpClientException $exception) {
+        } catch (GuzzleException | \Exception $exception) {
             throw new GuzzleHttpClientException($exception->getMessage());
         }
     }

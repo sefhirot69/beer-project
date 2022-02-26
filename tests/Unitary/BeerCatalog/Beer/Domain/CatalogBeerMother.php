@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\BeerCatalog\Beer\Domain;
+namespace App\Tests\Unitary\BeerCatalog\Beer\Domain;
 
 use App\BeerCatalog\Beer\Domain\CatalogBeer;
 

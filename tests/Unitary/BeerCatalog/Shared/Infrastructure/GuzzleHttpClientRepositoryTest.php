@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\BeerCatalog\Shared\Infrastructure;
+namespace App\Tests\Unitary\BeerCatalog\Shared\Infrastructure;
 
 use App\Tests\DataMock\HttpClientResponse;
 use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;

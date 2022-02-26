@@ -18,6 +18,9 @@
     </php>
 
     <testsuites>
+        <testsuite name="Unitary">
+            <directory>tests</directory>
+        </testsuite>
         <testsuite name="BeerCatalog">
             <directory>tests</directory>
         </testsuite>

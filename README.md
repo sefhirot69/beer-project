@@ -1,6 +1,13 @@
-## 🚀 Instalación
+#Catálogo Cervezas
 
+***
 ![flujo de trabajo de ejemplo](https://github.com/sefhirot69/beer-project/actions/workflows/php.yml/badge.svg)
+<a href="#"><img src="https://img.shields.io/badge/Symfony-4.4-purple.svg?style=flat-square&logo=symfony" alt="Symfony 4.4"/></a>
+![flujo de trabajo de ejemplo](https://github.com/sefhirot69/beer-project/actions/workflows/style_standard.yml/badge.svg)
+![flujo de trabajo de ejemplo](https://github.com/sefhirot69/beer-project/actions/workflows/tests.yml/badge.svg)
+---
+
+## 🚀 Instalación
 
 ### 🐳 Herramientas necesarias
 

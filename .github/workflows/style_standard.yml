@@ -1,4 +1,4 @@
-name: PHP Coding Standard
+name: PHP Coding Style Standard
 
 on:
   push:

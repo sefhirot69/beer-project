@@ -1,6 +1,6 @@
 ## 🚀 Instalación
 
-![example branch parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=master)
+![flujo de trabajo de ejemplo](https://github.com/sefhirot69/beer-project/actions/workflows/php.yml/badge.svg)
 
 ### 🐳 Herramientas necesarias
 

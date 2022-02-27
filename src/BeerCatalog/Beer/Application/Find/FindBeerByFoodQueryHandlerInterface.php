@@ -7,5 +7,5 @@ use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
 
 interface FindBeerByFoodQueryHandlerInterface
 {
-    public function __invoke(FindBeerByFoodQuery $query) : CatalogBeerDto;
+    public function __invoke(FindBeerByFoodQuery $query): CatalogBeerDto;
 }

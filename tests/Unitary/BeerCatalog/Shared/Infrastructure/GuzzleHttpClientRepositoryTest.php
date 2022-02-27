@@ -24,9 +24,8 @@ class GuzzleHttpClientRepositoryTest extends TestCase
      * @When call to function fetch
      * @Then should return a 200
      */
-    public function fetchShouldReturnStatusOk() : void
+    public function fetchShouldReturnStatusOk(): void
     {
-
         $body = Utils::streamFor(HttpClientResponse::response());
         $mock = new MockHandler(
             [
@@ -35,14 +34,14 @@ class GuzzleHttpClientRepositoryTest extends TestCase
         );
 
         $handlerStack = HandlerStack::create($mock);
-        $guzzleMock   = new Client(
+        $guzzleMock = new Client(
             [
                 'handler' => $handlerStack,
             ]
         );
 
         $repository = new GuzzleHttpClientRepository($guzzleMock);
-        $result     = $repository->fetch('GET', '/test', []);
+        $result = $repository->fetch('GET', '/test', []);
 
         self::assertEquals(200, $result['statusCode']);
     }
@@ -53,9 +52,8 @@ class GuzzleHttpClientRepositoryTest extends TestCase
      * @When call to function fetch
      * @Then should return an exception
      */
-    public function fetchShouldReturnToException() : void
+    public function fetchShouldReturnToException(): void
     {
-
         $this->expectException(GuzzleHttpClientException::class);
         $this->expectErrorMessage('An error has occurred');
 
@@ -67,7 +65,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
         );
 
         $handlerStack = HandlerStack::create($mock);
-        $guzzleMock   = new Client(
+        $guzzleMock = new Client(
             [
                 'handler' => $handlerStack,
             ]
@@ -79,5 +77,4 @@ class GuzzleHttpClientRepositoryTest extends TestCase
         //THEN
         $repository->fetch('GET', '/test', []);
     }
-
 }

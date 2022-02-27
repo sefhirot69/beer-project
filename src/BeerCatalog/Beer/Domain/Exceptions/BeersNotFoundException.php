@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\BeerCatalog\Beer\Domain\Exceptions;
 
 final class BeersNotFoundException extends \Exception
@@ -14,6 +13,4 @@ final class BeersNotFoundException extends \Exception
     {
         parent::__construct(sprintf($this->message, $filterFood), $this->code);
     }
-
-
 }

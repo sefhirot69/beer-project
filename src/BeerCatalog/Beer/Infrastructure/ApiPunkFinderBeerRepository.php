@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\BeerCatalog\Beer\Infrastructure;
 
 use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
@@ -16,7 +15,6 @@ use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 
 final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
 {
-
     private const ENDPOINT = 'beers';
 
     private HttpClientDataSource $httpClientDataSource;
@@ -29,16 +27,16 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function findBeerByFood(FindBeerByFoodQuery $query): CatalogBeerDto
     {
-        $endpoint = $this->baseUrlApiPunk . self::ENDPOINT;
+        $endpoint = $this->baseUrlApiPunk.self::ENDPOINT;
         $resultBeers = $this->httpClientDataSource->fetch(
             'GET',
             $endpoint,
             [
-                'food' => $query->getFoodFilter().'_'
+                'food' => $query->getFoodFilter().'_',
             ]
         );
 
@@ -50,8 +48,6 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
     }
 
     /**
-     * @param array $resultBeers
-     * @param bool $withDetails
      * @return array|Beer[]
      */
     private function buildBeers(array $resultBeers, bool $withDetails): array

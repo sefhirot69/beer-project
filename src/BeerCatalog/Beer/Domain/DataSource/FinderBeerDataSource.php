@@ -10,9 +10,7 @@ use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 interface FinderBeerDataSource
 {
     /**
-     * @param FindBeerByFoodQuery $query
-     * @return CatalogBeerDto
      * @throws BeersNotFoundException|HttpClientException
      */
-    public function findBeerByFood(FindBeerByFoodQuery $query) : CatalogBeerDto;
+    public function findBeerByFood(FindBeerByFoodQuery $query): CatalogBeerDto;
 }

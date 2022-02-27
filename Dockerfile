@@ -12,6 +12,8 @@ WORKDIR /var/www/html
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html/
 
+RUN composer install --optimize-autoloader
+
 # MAIN
 FROM php:7.4-apache
 
@@ -42,8 +44,6 @@ COPY --from=composer-vendor /var/www/html/vendor /var/www/html/vendor
 
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R u+rwx /var/www/html/
-
-RUN composer install --optimize-autoloader
 
 # Expose port
 EXPOSE 80

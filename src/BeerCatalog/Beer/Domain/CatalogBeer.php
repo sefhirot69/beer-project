@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\BeerCatalog\Beer\Domain;
 
 use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;

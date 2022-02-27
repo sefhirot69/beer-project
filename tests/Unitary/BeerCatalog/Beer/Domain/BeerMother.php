@@ -16,13 +16,11 @@ final class BeerMother
         string $description,
         ?BeerDetails $details = null
     ): Beer {
-
         return Beer::create($id, $name, $description, $details);
     }
 
     public static function randomBeer(): Beer
     {
-
         return self::create(
             MotherCreator::random()->randomNumber(3),
             MotherCreator::random()->name(),
@@ -32,7 +30,6 @@ final class BeerMother
 
     public static function randomBeerWithDetail(): Beer
     {
-
         return self::create(
             MotherCreator::random()->randomNumber(3),
             MotherCreator::random()->name(),
@@ -40,5 +37,4 @@ final class BeerMother
             BeerDetailsMother::random()
         );
     }
-
 }

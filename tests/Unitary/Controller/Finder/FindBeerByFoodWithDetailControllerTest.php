@@ -25,7 +25,7 @@ final class FindBeerByFoodWithDetailControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAValidJsonWithCatalogBeerWithDetail() : void
+    public function mustReturnAValidJsonWithCatalogBeerWithDetail(): void
     {
         //GIVEN
         $catalogFake = CatalogBeerMother::randomBeerWithDetail()->mapToDto();
@@ -53,7 +53,7 @@ final class FindBeerByFoodWithDetailControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAnErrorWithStatusCode404() : void
+    public function mustReturnAnErrorWithStatusCode404(): void
     {
         //GIVEN
         $filterFood = 'a';
@@ -78,7 +78,7 @@ final class FindBeerByFoodWithDetailControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAnErrorWithStatusCode400() : void
+    public function mustReturnAnErrorWithStatusCode400(): void
     {
         //GIVEN
         $error = 'An error occurred';
@@ -103,10 +103,9 @@ final class FindBeerByFoodWithDetailControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAnErrorWithInvalidArgumentException() : void
+    public function mustReturnAnErrorWithInvalidArgumentException(): void
     {
         //GIVEN
-
 
         //WHEN
         $controller = new FindBeerByFoodWithDetailController($this->handlerMock);

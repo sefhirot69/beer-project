@@ -11,14 +11,11 @@ final class HealthCheck extends AbstractController
 {
     /**
      * @Route("/healthcheck", name="app_healthcheck")
-     * @return JsonResponse
      */
     public function __invoke(): JsonResponse
     {
-
         return $this->json([
-            'status' => true
+            'status' => true,
         ], Response::HTTP_OK);
     }
-
 }

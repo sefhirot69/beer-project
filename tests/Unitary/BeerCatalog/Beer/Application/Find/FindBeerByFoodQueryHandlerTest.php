@@ -23,17 +23,16 @@ final class FindBeerByFoodQueryHandlerTest extends TestCase
         $this->finderBeerMock = $this->createMock(FinderBeerDataSource::class);
     }
 
-
     /**
      * @test
      * @given
      * @when
      * @then
      */
-    public function findBeerByFoodQueryHandlerShouldReturnOnceCatalogBeerDto() : void
+    public function findBeerByFoodQueryHandlerShouldReturnOnceCatalogBeerDto(): void
     {
         //GIVEN
-        $query = FindBeerByFoodQuery::create('crud',false);
+        $query = FindBeerByFoodQuery::create('crud', false);
 
         $this->finderBeerMock
             ->expects(self::once())

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Controller\Finder;
 
 use App\BeerCatalog\Beer\Application\Find\FindBeerByFoodQueryHandlerInterface;
@@ -19,9 +18,6 @@ class FindBeerByFoodController extends AbstractController
 {
     protected FindBeerByFoodQueryHandlerInterface $findBeerByFoodQueryHandler;
 
-    /**
-     * @param FindBeerByFoodQueryHandlerInterface $findBeerByFoodQueryHandler
-     */
     public function __construct(FindBeerByFoodQueryHandlerInterface $findBeerByFoodQueryHandler)
     {
         $this->findBeerByFoodQueryHandler = $findBeerByFoodQueryHandler;
@@ -38,10 +34,11 @@ class FindBeerByFoodController extends AbstractController
             $this->checkArgument($foodFilter);
 
             $catalog = ($this->findBeerByFoodQueryHandler)(FindBeerByFoodQuery::create($foodFilter));
+
             return new JsonResponse($catalog->getCatalogBeer(), Response::HTTP_OK);
-        } catch (BeersNotFoundException | HttpClientException | \InvalidArgumentException $exception) {
+        } catch (BeersNotFoundException|HttpClientException|\InvalidArgumentException $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
-        } catch (\Exception | \TypeError $exception) {
+        } catch (\Exception|\TypeError $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -52,10 +49,7 @@ class FindBeerByFoodController extends AbstractController
     protected function checkArgument($foodFilter): void
     {
         if (!$foodFilter) {
-            throw new \InvalidArgumentException(
-                'Argument `food` is required',
-                Response::HTTP_BAD_REQUEST
-            );
+            throw new \InvalidArgumentException('Argument `food` is required', Response::HTTP_BAD_REQUEST);
         }
     }
 }

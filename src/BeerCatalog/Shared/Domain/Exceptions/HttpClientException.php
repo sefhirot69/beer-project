@@ -13,5 +13,4 @@ class HttpClientException extends Exception
     {
         parent::__construct(sprintf($this->message, $error), $this->code);
     }
-
 }

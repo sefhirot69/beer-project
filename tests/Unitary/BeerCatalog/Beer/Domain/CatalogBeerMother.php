@@ -16,18 +16,20 @@ final class CatalogBeerMother
     public static function randomBeer(): CatalogBeer
     {
         $limit = random_int(1, 5);
-        for ($i = 0; $i <= $limit; $i++) {
+        for ($i = 0; $i <= $limit; ++$i) {
             $result[] = BeerMother::randomBeer();
         }
+
         return CatalogBeer::create($result);
     }
 
     public static function randomBeerWithDetail(): CatalogBeer
     {
         $limit = random_int(1, 5);
-        for ($i = 0; $i <= $limit; $i++) {
+        for ($i = 0; $i <= $limit; ++$i) {
             $result[] = BeerMother::randomBeerWithDetail();
         }
+
         return CatalogBeer::create($result);
     }
 }

@@ -108,7 +108,6 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
         $res->findBeerByFood($query);
     }
 
-
     /**
      * @test
      * @given
@@ -135,5 +134,4 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
         //THEN
         $res->findBeerByFood($query);
     }
-
 }

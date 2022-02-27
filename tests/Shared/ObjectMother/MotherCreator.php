@@ -11,7 +11,8 @@ final class MotherCreator
 {
     private static $faker;
 
-    public static function random() : Generator {
+    public static function random(): Generator
+    {
         return self::$faker = self::$faker ?: Factory::create();
     }
 }

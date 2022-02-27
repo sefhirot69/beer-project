@@ -13,12 +13,6 @@ final class Beer
     private string $description;
     private ?BeerDetails $details;
 
-    /**
-     * @param int $id
-     * @param string $name
-     * @param string $description
-     * @param BeerDetails|null $details
-     */
     public function __construct(int $id, string $name, string $description, ?BeerDetails $details = null)
     {
         $this->id = $id;
@@ -32,41 +26,26 @@ final class Beer
         return new self($id, $name, $description, $details);
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return BeerDetails|null
-     */
     public function getDetails(): ?BeerDetails
     {
         return $this->details;
     }
 
-    /**
-     * @return BeerDto
-     */
     public function mapToDto(): BeerDto
     {
         return BeerDto::create(
@@ -76,5 +55,4 @@ final class Beer
             null !== $this->getDetails() ? $this->getDetails()->mapToDto() : null
         );
     }
-
 }

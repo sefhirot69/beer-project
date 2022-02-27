@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\BeerCatalog\Beer\Domain\Dto;
 
 final class CatalogBeerDto implements \JsonSerializable
@@ -32,7 +31,6 @@ final class CatalogBeerDto implements \JsonSerializable
     {
         return $this->catalogBeer;
     }
-
 
     public function jsonSerialize(): array
     {

@@ -41,6 +41,4 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
     }
-
-
 }

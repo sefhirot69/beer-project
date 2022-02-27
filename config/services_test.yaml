@@ -1,6 +1,12 @@
 framework:
     test: true
 services:
-
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        
     App\BeerCatalog\Shared\Domain\HttpClientDataSource:
         public: true
+    
+    App\Tests\Behat\:
+        resource: '../tests/Behat/*'

@@ -1,4 +1,16 @@
 {
+    "behat/behat": {
+        "version": "v3.10.0"
+    },
+    "behat/gherkin": {
+        "version": "v4.9.0"
+    },
+    "behat/mink": {
+        "version": "v1.9.0"
+    },
+    "behat/transliterator": {
+        "version": "v1.3.0"
+    },
     "composer/pcre": {
         "version": "1.0.1"
     },
@@ -29,6 +41,27 @@
     "fakerphp/faker": {
         "version": "v1.19.0"
     },
+    "friends-of-behat/mink-browserkit-driver": {
+        "version": "v1.6.1"
+    },
+    "friends-of-behat/mink-extension": {
+        "version": "v2.6.1"
+    },
+    "friends-of-behat/symfony-extension": {
+        "version": "2.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "1e012e04f573524ca83795cd19df9ea690adb604"
+        },
+        "files": [
+            "behat.yml.dist",
+            "config/services_test.yaml",
+            "features/demo.feature",
+            "tests/Behat/DemoContext.php"
+        ]
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "3.4",
         "recipe": {
@@ -41,6 +74,9 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.5"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.4.1"
     },
@@ -49,6 +85,9 @@
     },
     "guzzlehttp/psr7": {
         "version": "2.1.0"
+    },
+    "laminas/laminas-code": {
+        "version": "4.5.1"
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
@@ -335,6 +374,9 @@
     "symfony/process": {
         "version": "v4.4.37"
     },
+    "symfony/proxy-manager-bridge": {
+        "version": "v4.4.37"
+    },
     "symfony/routing": {
         "version": "4.4",
         "recipe": {
@@ -354,6 +396,22 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.37"
+    },
+    "symfony/translation": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "config/packages/translation.yaml",
+            "translations/.gitignore"
+        ]
+    },
+    "symfony/translation-contracts": {
+        "version": "v2.5.0"
     },
     "symfony/var-dumper": {
         "version": "v4.4.37"

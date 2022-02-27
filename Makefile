@@ -17,9 +17,17 @@ install-deps: composer-install
 
 update-deps: composer-update
 
-test:
+test: cs-prev
 	$(EXEC_PHP) ./vendor/bin/phpunit
 	@echo "Test Executed ✅"
+
+cs:
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --diff
+	@echo "Coding Standar Fixer Executed ✅"
+
+cs-prev:
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --dry-run --diff
+	@echo "Coding Standar Fixer Executed ✅"
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi

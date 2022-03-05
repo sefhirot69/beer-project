@@ -32,4 +32,3 @@ jobs:
       - name: Run test suite
         run: |
           vendor/bin/phpunit
-          vendor/bin/behat --format=progress -v

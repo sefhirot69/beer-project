@@ -2,7 +2,7 @@
 
 ---
 ![Composer](https://github.com/sefhirot69/beer-project/actions/workflows/php.yml/badge.svg)
-<a href="#"><img alt="Symfony 4.4" src="https://img.shields.io/badge/Symfony-4.4-purple.svg?style=flat-square&amp;logo=symfony"/></a>
+<a href="#"><img alt="Symfony 5.4" src="https://img.shields.io/badge/Symfony-5.4-purple.svg?style=flat-square&amp;logo=symfony"/></a>
 ![PHP Coding Standar](https://github.com/sefhirot69/beer-project/actions/workflows/style_standard.yml/badge.svg)
 ![CI](https://github.com/sefhirot69/beer-project/actions/workflows/tests.yml/badge.svg)
 ---

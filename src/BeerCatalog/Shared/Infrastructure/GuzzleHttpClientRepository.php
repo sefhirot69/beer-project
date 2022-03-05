@@ -7,7 +7,7 @@ use App\BeerCatalog\Shared\Infrastructure\Exceptions\GuzzleHttpClientException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-final class GuzzleHttpClientRepository implements HttpClientDataSource
+class GuzzleHttpClientRepository implements HttpClientDataSource
 {
     private Client $client;
 

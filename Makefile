@@ -19,6 +19,7 @@ update-deps: composer-update
 
 test: cs-prev
 	$(EXEC_PHP) ./vendor/bin/phpunit
+	$(EXEC_PHP) ./vendor/bin/behat --format=progress -v
 	@echo "Test Executed ✅"
 
 cs:

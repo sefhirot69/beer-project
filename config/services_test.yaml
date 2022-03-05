@@ -4,9 +4,11 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-        
-    App\BeerCatalog\Shared\Domain\HttpClientDataSource:
-        public: true
     
-    App\Tests\Behat\:
-        resource: '../tests/Behat/*'
+    App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository:
+        public: true
+        
+    BeerCatalog\Shared\Domain\HttpClientDataSource: '@BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository'
+    
+    App\Tests\EndToEnd\:
+        resource: '../tests/EndToEnd/*'

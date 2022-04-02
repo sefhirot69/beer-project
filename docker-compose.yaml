@@ -32,6 +32,15 @@ services:
       - ./api_documentation.yaml:/api_documentation.yaml
     environment:
       SWAGGER_FILE: /api_documentation.yaml
+  quodana:
+    container_name: quodana-php
+    image: jetbrains/qodana-php
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./:/data/project/
+    command:
+      - --show-report
 
 volumes:
   data:

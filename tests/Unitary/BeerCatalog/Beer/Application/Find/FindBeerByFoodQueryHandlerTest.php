@@ -31,7 +31,7 @@ final class FindBeerByFoodQueryHandlerTest extends TestCase
      */
     public function findBeerByFoodQueryHandlerShouldReturnOnceCatalogBeerDto(): void
     {
-        //GIVEN
+        // GIVEN
         $query = FindBeerByFoodQuery::create('crud', false);
 
         $this->finderBeerMock
@@ -39,10 +39,10 @@ final class FindBeerByFoodQueryHandlerTest extends TestCase
             ->method('findBeerByFood')
             ->willReturn(CatalogBeerMother::randomBeer()->mapToDto());
 
-        //WHEN
+        // WHEN
         $findBeerByFoodQueryHandler = new FindBeerByFoodQueryHandler($this->finderBeerMock);
 
-        //THEN
+        // THEN
         ($findBeerByFoodQueryHandler)($query);
     }
 }

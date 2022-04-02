@@ -1,6 +1,14 @@
 framework:
     test: true
 services:
-
-    App\BeerCatalog\Shared\Domain\HttpClientDataSource:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository:
         public: true
+        
+    BeerCatalog\Shared\Domain\HttpClientDataSource: '@BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository'
+    
+    App\Tests\EndToEnd\:
+        resource: '../tests/EndToEnd/*'

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Controller\Finder;
 
-use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
+use App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use App\Tests\Shared\DataMock\ApiPunkResponse;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -15,7 +15,7 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
 
     protected function setUp(): void
     {
-        $this->fetchMock = $this->createMock(HttpClientDataSource::class);
+        $this->fetchMock = $this->createMock(GuzzleHttpClientRepository::class);
         $this->client = self::createClient();
     }
 
@@ -27,17 +27,17 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
      */
     public function mustReturnAValidJsonWithCatalogBeerFunctional(): void
     {
-        //GIVEN
+        // GIVEN
         $this->fetchMock->expects(self::once())
             ->method('fetch')
             ->willReturn(json_decode(ApiPunkResponse::responseOk(), true));
 
-        //WHEN
+        // WHEN
         $router = $this->client->getContainer()->get('router');
-        $this->client->getContainer()->set(HttpClientDataSource::class, $this->fetchMock);
+        $this->client->getContainer()->set(GuzzleHttpClientRepository::class, $this->fetchMock);
         $crawler = $this->client->request('GET', $router->generate('app_find_beer').'?food=a');
 
-        //THEN
+        // THEN
 
         self::assertResponseIsSuccessful();
     }

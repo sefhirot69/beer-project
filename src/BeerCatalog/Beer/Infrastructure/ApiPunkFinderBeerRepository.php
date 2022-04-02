@@ -52,7 +52,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
      */
     private function buildBeers(array $resultBeers, bool $withDetails): array
     {
-        //Con detalles
+        // Con detalles
         if ($withDetails) {
             return array_map(static function ($beer) {
                 return Beer::create(
@@ -64,7 +64,7 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
             }, $resultBeers);
         }
 
-        //Sin detalles
+        // Sin detalles
         return array_map(static function ($beer) {
             return Beer::create($beer['id'], $beer['name'], $beer['description']);
         }, $resultBeers);

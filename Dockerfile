@@ -1,4 +1,4 @@
-FROM php:7.4-apache AS composer-vendor
+FROM php:8.1-apache AS composer-vendor
 
 # Install basic deps
 RUN apt-get update -qq
@@ -12,15 +12,13 @@ WORKDIR /var/www/html
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html/
 
-RUN composer install --optimize-autoloader
-
 # MAIN
-FROM php:7.4-apache
+FROM php:8.1-apache
 
 RUN apt-get update -qq \
     && apt-get install -yq zlib1g-dev g++ libicu-dev zip libzip-dev zip libpq-dev\
     && pecl install apcu \
-    && pecl install xdebug-3.0.3\
+    && pecl install xdebug-3.1.2 \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-enable apcu \
     && docker-php-ext-install intl opcache\
@@ -40,7 +38,6 @@ COPY docker/vhost/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy composer and vendor
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=composer-vendor /var/www/html/vendor /var/www/html/vendor
 
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R u+rwx /var/www/html/

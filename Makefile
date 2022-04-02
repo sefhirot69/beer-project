@@ -11,14 +11,15 @@ COMPOSER       = $(EXEC) composer
 deploy: build
 	@echo "📦 Build done"
 
-build: create_env_file recreate install-deps test
+build: create_env_file rebuild test
 
-install-deps: composer-install
+deps: composer-install
 
 update-deps: composer-update
 
 test: cs-prev
 	$(EXEC_PHP) ./vendor/bin/phpunit
+	$(EXEC_PHP) ./vendor/bin/behat --format=progress -v
 	@echo "Test Executed ✅"
 
 cs:
@@ -56,6 +57,17 @@ stop:
 recreate:
 	@echo "🔥 Recreate container!!!"
 	$(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
+	make deps
+	make start
+rebuild:
+	@echo "🔥 Rebuild container!!!"
+	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
+	make deps
+	make start
+
+# 🦝 Apache
+reload:
+	$(EXEC) /bin/bash service apache2 restart || true
 
 #clear cache
 clear:

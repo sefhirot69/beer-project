@@ -14,9 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class FindBeerByFoodWithDetailController extends FindBeerByFoodController
 {
-    /**
-     * @Route("/beer/detail", name="app_find_beer_detail", methods={"GET"})
-     */
+    #[Route('/beer/detail', name: 'app_find_beer_detail', methods: ['GET'])]
     public function __invoke(Request $request): JsonResponse
     {
         try {

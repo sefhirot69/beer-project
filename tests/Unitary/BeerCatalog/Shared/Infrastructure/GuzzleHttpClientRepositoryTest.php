@@ -57,7 +57,7 @@ class GuzzleHttpClientRepositoryTest extends TestCase
         $this->expectException(GuzzleHttpClientException::class);
         $this->expectErrorMessage('An error has occurred');
 
-        //GIVEN
+        // GIVEN
         $mock = new MockHandler(
             [
                 new Response(400, []),
@@ -71,10 +71,10 @@ class GuzzleHttpClientRepositoryTest extends TestCase
             ]
         );
 
-        //WHEN
+        // WHEN
         $repository = new GuzzleHttpClientRepository($guzzleMock);
 
-        //THEN
+        // THEN
         $repository->fetch('GET', '/test', []);
     }
 }

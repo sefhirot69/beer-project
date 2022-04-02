@@ -1,10 +1,10 @@
 {
     "name": "sefhirot69/beer-project",
-    "description": "o2o technical test",
+    "description": "api beer project",
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.4.1",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
@@ -72,6 +72,9 @@
     "require-dev": {
         "composer": "^2.2",
         "fakerphp/faker": "^1.19",
+        "friends-of-behat/mink-browserkit-driver": "^1.6",
+        "friends-of-behat/mink-extension": "^2.6",
+        "friends-of-behat/symfony-extension": "^2.3",
         "friendsofphp/php-cs-fixer": "3.*",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",

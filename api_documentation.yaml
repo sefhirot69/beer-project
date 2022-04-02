@@ -7,15 +7,15 @@ servers:
   - url: http://localhost:8081
     variables: {}
 paths:
-  /beer:
+  /beer/food/{food}:
     get:
       tags:
         - Catalog Beer
-      summary: Catalog Beer
+      summary: Get Beer by Food
       operationId: CatalogBeer
       parameters:
         - name: food
-          in: query
+          in: path
           description: 'Devuelve todas las cervezas que coinciden con la cadena de comida suministrada, esto realiza una coincidencia aproximada.'
           required: true
           style: form
@@ -39,15 +39,15 @@ paths:
         '500':
           description: Internal Server Error
       deprecated: false
-  /beer/detail:
+  /beer/food/{food}/detail:
     get:
       tags:
         - Catalog Beer
-      summary: Catalog Beer With Details
+      summary: Get Beer by Food with Details
       operationId: CatalogBeerWithDetail
       parameters:
         - name: food
-          in: query
+          in: path
           description: 'Devuelve todas las cervezas que coinciden con la cadena de comida suministrada, esto realiza una coincidencia aproximada.'
           required: true
           style: form

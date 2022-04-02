@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Controller\Finder;
 
+use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository;
 use App\Tests\Shared\DataMock\ApiPunkResponse;
+use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
 {
-    private $fetchMock;
-    private $client;
+    private HttpClientDataSource|MockObject $fetchMock;
+    private KernelBrowser $client;
 
     protected function setUp(): void
     {
-        $this->fetchMock = $this->createMock(GuzzleHttpClientRepository::class);
+        $this->fetchMock = $this->createMock(HttpClientDataSource::class);
         $this->client = self::createClient();
     }
 
@@ -33,9 +36,8 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
             ->willReturn(json_decode(ApiPunkResponse::responseOk(), true));
 
         // WHEN
-        $router = $this->client->getContainer()->get('router');
         $this->client->getContainer()->set(GuzzleHttpClientRepository::class, $this->fetchMock);
-        $this->client->request('GET', $router->generate('app_find_beer_by_food').'?food=a');
+        $this->client->request('GET', 'beer/food/pin');
 
         // THEN
 

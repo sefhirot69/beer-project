@@ -8,7 +8,9 @@ services:
     App\BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository:
         public: true
         
-    BeerCatalog\Shared\Domain\HttpClientDataSource: '@BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository'
+    BeerCatalog\Shared\Domain\HttpClientDataSource: ~
+    BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository: ~
+
     
     App\Tests\EndToEnd\:
         resource: '../tests/EndToEnd/*'

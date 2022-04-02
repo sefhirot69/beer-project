@@ -5,6 +5,7 @@ EXEC           = docker exec -ti $(CONTAINER)
 EXEC_PHP       = $(EXEC) php
 SYMFONY        = $(EXEC_PHP) bin/console
 COMPOSER       = $(EXEC) composer
+CURRENT-DIR    := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 .DEFAULT_GOAL := deploy
 
@@ -17,11 +18,12 @@ deps: composer-install
 
 update-deps: composer-update
 
-test: cs-prev
+test:
 	$(EXEC_PHP) ./vendor/bin/phpunit
 	$(EXEC_PHP) ./vendor/bin/behat --format=progress -v
 	@echo "Test Executed ✅"
 
+#Linter
 cs:
 	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --diff
 	@echo "Coding Standar Fixer Executed ✅"
@@ -32,6 +34,14 @@ cs-prev:
 
 create_env_file:
 	@if [ ! -f .env.local ]; then cp .env .env.local; fi
+
+
+# Analysis Static Code
+audit:
+	@docker run --rm -it -v $(CURRENT-DIR):/data/project/ -p 8083:8080 jetbrains/qodana-license-audit --show-report
+
+static-analysis:
+	@docker run --rm -it -v $(CURRENT-DIR):/data/project/ -p 8083:8080 jetbrains/qodana-php:2021.3-eap --show-report
 
 # 🐘 Composer
 composer-install: ACTION=install

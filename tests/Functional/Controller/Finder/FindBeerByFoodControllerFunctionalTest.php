@@ -35,7 +35,7 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
         // WHEN
         $router = $this->client->getContainer()->get('router');
         $this->client->getContainer()->set(GuzzleHttpClientRepository::class, $this->fetchMock);
-        $crawler = $this->client->request('GET', $router->generate('app_find_beer').'?food=a');
+        $this->client->request('GET', $router->generate('app_find_beer_by_food').'?food=a');
 
         // THEN
 

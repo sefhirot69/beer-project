@@ -3,9 +3,7 @@ Feature:
   me devuelva una cerveza que guarde relación con la comida.
 
   Scenario: Find Beer By Food
-    When I send a 'GET' request to "/beer" with values:
-      | name | value |
-      | food | beer  |
+    When I send a 'GET' request to "/beer/food/beer":
     Then response code should be 200
     And the response should contain json:
       """

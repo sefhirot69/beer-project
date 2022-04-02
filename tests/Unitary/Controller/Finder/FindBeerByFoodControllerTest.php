@@ -11,7 +11,6 @@ use App\Controller\Finder\FindBeerByFoodController;
 use App\Tests\Unitary\BeerCatalog\Beer\Domain\CatalogBeerMother;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 final class FindBeerByFoodControllerTest extends TestCase
 {
@@ -100,7 +99,6 @@ final class FindBeerByFoodControllerTest extends TestCase
         self::assertJson($result->getContent());
     }
 
-
     /**
      * @test
      * @given
@@ -128,5 +126,4 @@ final class FindBeerByFoodControllerTest extends TestCase
             filter_var($result->getContent(), FILTER_DEFAULT)
         );
     }
-
 }

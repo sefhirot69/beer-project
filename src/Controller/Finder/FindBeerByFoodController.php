@@ -39,7 +39,6 @@ final class FindBeerByFoodController extends AbstractController
     public function withDetail(string|Request $request): JsonResponse
     {
         try {
-
             $catalog = ($this->findBeerByFoodQueryHandler)(FindBeerByFoodQuery::create($request, true));
 
             return new JsonResponse($catalog->getCatalogBeer(), Response::HTTP_OK);

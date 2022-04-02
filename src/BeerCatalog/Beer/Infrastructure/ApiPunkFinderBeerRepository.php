@@ -47,9 +47,6 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
         return CatalogBeer::create($this->buildBeers($resultBeers, $query->isWithDetail()))->mapToDto();
     }
 
-    /**
-     * @return array|Beer[]
-     */
     private function buildBeers(array $resultBeers, bool $withDetails): array
     {
         // Con detalles

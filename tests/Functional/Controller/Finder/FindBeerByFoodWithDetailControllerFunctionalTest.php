@@ -27,17 +27,17 @@ final class FindBeerByFoodWithDetailControllerFunctionalTest extends WebTestCase
      */
     public function mustReturnAValidJsonWithCatalogBeerFunctional(): void
     {
-        //GIVEN
+        // GIVEN
         $this->fetchMock->expects(self::once())
             ->method('fetch')
             ->willReturn(json_decode(ApiPunkResponse::responseOk(), true));
 
-        //WHEN
+        // WHEN
         $router = $this->client->getContainer()->get('router');
         $this->client->getContainer()->set(GuzzleHttpClientRepository::class, $this->fetchMock);
         $this->client->request('GET', $router->generate('app_find_beer_detail').'?food=a');
 
-        //THEN
+        // THEN
 
         self::assertResponseIsSuccessful();
     }

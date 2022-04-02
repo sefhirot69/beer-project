@@ -29,16 +29,16 @@ final class FindBeerByFoodControllerTest extends TestCase
      */
     public function mustReturnAValidJsonWithCatalogBeer(): void
     {
-        //GIVEN
+        // GIVEN
         $catalogFake = CatalogBeerMother::randomBeer()->mapToDto();
         $this->handlerMock->expects(self::once())
             ->method('__invoke')
             ->willReturn($catalogFake);
 
-        //WHEN
+        // WHEN
         $controller = new FindBeerByFoodController($this->handlerMock);
 
-        //THEN
+        // THEN
         $result = $controller(new Request(['food' => 'a']));
 
         self::assertEquals(200, $result->getStatusCode());
@@ -57,17 +57,17 @@ final class FindBeerByFoodControllerTest extends TestCase
      */
     public function mustReturnAnErrorWithStatusCode404(): void
     {
-        //GIVEN
+        // GIVEN
         $filterFood = 'a';
         $exception = new BeersNotFoundException($filterFood);
         $this->handlerMock->expects(self::once())
             ->method('__invoke')
             ->willThrowException($exception);
 
-        //WHEN
+        // WHEN
         $controller = new FindBeerByFoodController($this->handlerMock);
 
-        //THEN
+        // THEN
         $result = $controller(new Request(['food' => 'a']));
 
         self::assertEquals(404, $result->getStatusCode());
@@ -82,17 +82,17 @@ final class FindBeerByFoodControllerTest extends TestCase
      */
     public function mustReturnAnErrorWithStatusCode400(): void
     {
-        //GIVEN
+        // GIVEN
         $error = 'An error occurred';
         $exception = new HttpClientException($error);
         $this->handlerMock->expects(self::once())
             ->method('__invoke')
             ->willThrowException($exception);
 
-        //WHEN
+        // WHEN
         $controller = new FindBeerByFoodController($this->handlerMock);
 
-        //THEN
+        // THEN
         $result = $controller(new Request(['food' => 'a']));
 
         self::assertEquals(400, $result->getStatusCode());
@@ -107,12 +107,12 @@ final class FindBeerByFoodControllerTest extends TestCase
      */
     public function mustReturnAnErrorWithInvalidArgumentException(): void
     {
-        //GIVEN
+        // GIVEN
 
-        //WHEN
+        // WHEN
         $controller = new FindBeerByFoodController($this->handlerMock);
 
-        //THEN
+        // THEN
         $result = $controller(new Request(['fod' => 'a']));
 
         self::assertEquals(400, $result->getStatusCode());

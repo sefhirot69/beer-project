@@ -6,7 +6,6 @@ namespace App\Tests\EndToEnd;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -22,17 +21,9 @@ class ApiBaseContext implements Context
     }
 
     /**
-     * @When I send a :method request to :path
-     */
-    public function iSendARequestTo(string $method, string $path)
-    {
-        $this->response = $this->kernel->handle(Request::create($path, $method));
-    }
-
-    /**
      * @Then response code should be :code
      */
-    public function responseCodeShouldBe(int $code)
+    public function responseCodeShouldBe(int $code): void
     {
         if (null === $this->response) {
             throw new \RuntimeException('No response received');
@@ -43,26 +34,30 @@ class ApiBaseContext implements Context
     }
 
     /**
-     * @When I send a :method request to :path with values:
+     * @When I send a :method request to :path:
      */
-    public function iSendAGetRequestToWithValues($method, $path, TableNode $table)
+    public function iSendARequestTo($method, $path): void
     {
-        foreach ($table as $row) {
-            $request[$row['name']] = $row['value'];
-        }
-        $queryString = http_build_query($request);
-        $this->response = $this->kernel->handle(Request::create("$path?$queryString", $method));
+        $this->response = $this->kernel->handle(Request::create($path, $method));
+    }
+
+    /**
+     * @When I send a :arg2 request to :arg1
+     */
+    public function iSendARequestTo2($arg1, $arg2): void
+    {
+        $this->response = $this->kernel->handle(Request::create($arg1, $arg2));
     }
 
     /**
      * @Then the response should contain json:
      */
-    public function theResponseShouldContainJson(PyStringNode $string)
+    public function theResponseShouldContainJson(PyStringNode $string): void
     {
         Assert::assertJson($this->response->getContent());
         Assert::assertEquals(
-            json_decode($this->response->getContent(), true),
-            json_decode($string->getRaw(), true)
+            json_decode($this->response->getContent(), true, 512, JSON_THROW_ON_ERROR),
+            json_decode($string->getRaw(), true, 512, JSON_THROW_ON_ERROR)
         );
     }
 }

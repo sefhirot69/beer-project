@@ -9,9 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class HealthCheck extends AbstractController
 {
-    /**
-     * @Route("/healthcheck", name="app_healthcheck")
-     */
+    #[Route('/healthcheck', name: 'app_healthcheck')]
     public function __invoke(): JsonResponse
     {
         return $this->json([

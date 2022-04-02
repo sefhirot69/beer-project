@@ -9,12 +9,12 @@ use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Shared\Domain\Exceptions\HttpClientException;
 use App\Controller\Finder\FindBeerByFoodController;
 use App\Tests\Unitary\BeerCatalog\Beer\Domain\CatalogBeerMother;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 final class FindBeerByFoodControllerTest extends TestCase
 {
-    private $handlerMock;
+    private FindBeerByFoodQueryHandlerInterface|MockObject $handlerMock;
 
     protected function setUp(): void
     {
@@ -39,7 +39,7 @@ final class FindBeerByFoodControllerTest extends TestCase
         $controller = new FindBeerByFoodController($this->handlerMock);
 
         // THEN
-        $result = $controller(new Request(['food' => 'a']));
+        $result = $controller('a');
 
         self::assertEquals(200, $result->getStatusCode());
         self::assertJson($result->getContent());
@@ -68,7 +68,7 @@ final class FindBeerByFoodControllerTest extends TestCase
         $controller = new FindBeerByFoodController($this->handlerMock);
 
         // THEN
-        $result = $controller(new Request(['food' => 'a']));
+        $result = $controller('a');
 
         self::assertEquals(404, $result->getStatusCode());
         self::assertJson($result->getContent());
@@ -93,7 +93,7 @@ final class FindBeerByFoodControllerTest extends TestCase
         $controller = new FindBeerByFoodController($this->handlerMock);
 
         // THEN
-        $result = $controller(new Request(['food' => 'a']));
+        $result = $controller('a');
 
         self::assertEquals(400, $result->getStatusCode());
         self::assertJson($result->getContent());
@@ -105,17 +105,25 @@ final class FindBeerByFoodControllerTest extends TestCase
      * @when
      * @then
      */
-    public function mustReturnAnErrorWithInvalidArgumentException(): void
+    public function mustReturnAValidJsonWithCatalogBeerWithDetail(): void
     {
         // GIVEN
+        $catalogFake = CatalogBeerMother::randomBeerWithDetail()->mapToDto();
+        $this->handlerMock->expects(self::once())
+            ->method('__invoke')
+            ->willReturn($catalogFake);
 
         // WHEN
         $controller = new FindBeerByFoodController($this->handlerMock);
 
         // THEN
-        $result = $controller(new Request(['fod' => 'a']));
+        $result = $controller('a');
 
-        self::assertEquals(400, $result->getStatusCode());
+        self::assertEquals(200, $result->getStatusCode());
         self::assertJson($result->getContent());
+        self::assertSame(
+            json_encode($catalogFake->getCatalogBeer(), JSON_THROW_ON_ERROR | 15),
+            filter_var($result->getContent(), FILTER_DEFAULT)
+        );
     }
 }

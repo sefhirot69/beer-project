@@ -2,10 +2,9 @@ Feature:
   Quiero que, dado una comida o tipo de comida
   me devuelva una cerveza que guarde relación con la comida.
 
+
   Scenario: Find Beer By Food With Detail
-    When I send a 'GET' request to "/beer/detail" with values:
-      | name | value |
-      | food | Pineapple |
+    When I send a 'GET' request to "/beer/food/pineapple/detail":
     Then response code should be 200
     And the response should contain json:
       """

@@ -10,6 +10,7 @@ services:
         
     BeerCatalog\Shared\Domain\HttpClientDataSource: ~
     BeerCatalog\Shared\Infrastructure\GuzzleHttpClientRepository: ~
+    App\BeerCatalog\Beer\Domain\DataSource\GetBeerDataSource: ~
 
     
     App\Tests\EndToEnd\:

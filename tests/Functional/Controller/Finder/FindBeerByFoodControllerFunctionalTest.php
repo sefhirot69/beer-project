@@ -33,7 +33,7 @@ final class FindBeerByFoodControllerFunctionalTest extends WebTestCase
         // GIVEN
         $this->fetchMock->expects(self::once())
             ->method('fetch')
-            ->willReturn(json_decode(ApiPunkResponse::responseOk(), true));
+            ->willReturn(json_decode(ApiPunkResponse::responseOk(), true, 512, JSON_THROW_ON_ERROR));
 
         // WHEN
         $this->client->getContainer()->set(GuzzleHttpClientRepository::class, $this->fetchMock);

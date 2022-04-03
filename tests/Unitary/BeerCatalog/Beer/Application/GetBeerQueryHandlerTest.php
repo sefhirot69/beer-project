@@ -5,6 +5,7 @@ namespace App\Tests\Unitary\BeerCatalog\Beer\Application;
 use App\BeerCatalog\Beer\Application\GetBeerQueryHandler;
 use App\BeerCatalog\Beer\Domain\DataSource\GetBeerDataSource;
 use App\Tests\Unitary\BeerCatalog\Beer\Domain\BeerMother;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class GetBeerQueryHandlerTest extends TestCase

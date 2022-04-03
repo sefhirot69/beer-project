@@ -28,6 +28,9 @@ RUN apt-get update -qq \
 RUN a2enmod rewrite
 RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/php.ini
 RUN echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/php.ini
+RUN echo "xdebug.client_port=9005" >> /usr/local/etc/php/php.ini
+RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/php.ini
+RUN echo "xdebug.discover_client_host=1" >> /usr/local/etc/php/php.ini
 RUN echo "memory_limit=512M"  >> /usr/local/etc/php/php.ini
 RUN echo "max_execution_time=900" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 

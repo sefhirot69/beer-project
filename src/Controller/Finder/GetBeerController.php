@@ -21,9 +21,7 @@ final class GetBeerController extends AbstractController
     public function __invoke(): JsonResponse
     {
         try {
-            $result = ($this->getBeerQueryHandler)();
-
-            return new JsonResponse([], Response::HTTP_OK);
+            return new JsonResponse(($this->getBeerQueryHandler)(), Response::HTTP_OK);
         } catch (HttpClientException $exception) {
             return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
         }

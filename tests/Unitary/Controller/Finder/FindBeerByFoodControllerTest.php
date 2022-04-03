@@ -44,7 +44,7 @@ final class FindBeerByFoodControllerTest extends TestCase
         self::assertEquals(200, $result->getStatusCode());
         self::assertJson($result->getContent());
         self::assertSame(
-            json_encode($catalogFake->getCatalogBeer(), 15),
+            json_encode($catalogFake->getCatalogBeer(), JSON_THROW_ON_ERROR | 15),
             filter_var($result->getContent(), FILTER_DEFAULT)
         );
     }

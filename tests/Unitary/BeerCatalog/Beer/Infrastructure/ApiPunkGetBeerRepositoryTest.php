@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unitary\BeerCatalog\Beer\Infrastructure;
 
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
+use App\BeerCatalog\Beer\Infrastructure\ApiPunkGetBeerRepository;
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

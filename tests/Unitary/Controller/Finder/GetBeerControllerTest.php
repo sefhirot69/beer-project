@@ -23,7 +23,7 @@ class GetBeerControllerTest extends TestCase
     /**
      * @test
      */
-    public function shouldExpectExceptionHttpException(): void
+    public function shouldExpectExceptionHttpExceptionWhenTryToReturnABeer(): void
     {
         // GIVEN
         $this->getBeerQH
@@ -34,6 +34,47 @@ class GetBeerControllerTest extends TestCase
         // WHEN
         $controller = new GetBeerController($this->getBeerQH);
         $result = $controller();
+
+        // THEN
+        self::assertEquals(400, $result->getStatusCode());
+        self::assertJson($result->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldExpectExceptionHttpExceptionWhenTryToReturnABeerWithDetail(): void
+    {
+        // GIVEN
+        $this->getBeerQH
+            ->expects(self::once())
+            ->method('__invoke')
+            ->willThrowException(new HttpClientException('peito'));
+
+        // WHEN
+        $controller = new GetBeerController($this->getBeerQH);
+        $result = $controller->withDetail();
+
+        // THEN
+        self::assertEquals(400, $result->getStatusCode());
+        self::assertJson($result->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnBeerWithDetail(): void
+    {
+        // GIVEN
+        $beerFake = BeerMother::randomBeerWithDetail();
+        $this->getBeerQH
+            ->expects(self::once())
+            ->method('__invoke')
+            ->willReturn($beerFake->mapToDto()); // GIVEN
+
+        // WHEN
+        $controller = new GetBeerController($this->getBeerQH);
+        $result = $controller->withDetail();
 
         // THEN
         self::assertEquals(400, $result->getStatusCode());

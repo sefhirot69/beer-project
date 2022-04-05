@@ -8,5 +8,5 @@ use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
 
 interface GetBeerDataSource
 {
-    public function get(): BeerDto;
+    public function get(bool $withDetail = false): BeerDto;
 }

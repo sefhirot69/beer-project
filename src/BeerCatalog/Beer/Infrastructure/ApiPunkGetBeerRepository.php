@@ -24,7 +24,7 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
      * @throws HttpClientException
      * @throws BeersNotFoundException
      */
-    public function get(): BeerDto
+    public function get(bool $withDetail = false): BeerDto
     {
         $endpoint = $this->baseUrlApiPunk.self::ENDPOINT;
         $result = $this->dataSource->fetch('GET', $endpoint, []);

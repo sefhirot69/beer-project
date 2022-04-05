@@ -13,7 +13,7 @@ class GetBeerQueryHandler
     {
     }
 
-    public function __invoke(): BeerDto
+    public function __invoke(bool $withDetails = false): BeerDto
     {
         return $this->getBeerDataSource->get();
     }

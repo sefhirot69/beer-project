@@ -34,7 +34,7 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
     public function findBeerByFoodShouldReturnCatalogBeerDtoWithoutDetails(): void
     {
         // GIVEN
-        $fakeResponse = json_decode(ApiPunkResponse::responseOk(), true);
+        $fakeResponse = json_decode(ApiPunkResponse::responseBeersOk(), true);
         $query = FindBeerByFoodQuery::create('a', false);
 
         // WHEN
@@ -62,7 +62,7 @@ class ApiPunkFinderBeerRepositoryTest extends TestCase
     public function findBeerByFoodShouldReturnCatalogBeerDtoWithDetails(): void
     {
         // GIVEN
-        $fakeResponse = json_decode(ApiPunkResponse::responseOk(), true);
+        $fakeResponse = json_decode(ApiPunkResponse::responseBeersOk(), true);
         $query = FindBeerByFoodQuery::create('a', true);
 
         // WHEN

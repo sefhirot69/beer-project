@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\BeerCatalog\Beer\Infrastructure;
 
+use App\BeerCatalog\Beer\Domain\Beer;
+use App\BeerCatalog\Beer\Domain\BeerDetails;
 use App\BeerCatalog\Beer\Domain\DataSource\GetBeerDataSource;
 use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
@@ -29,5 +31,24 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
         if (empty($result)) {
             throw new BeersNotFoundException('random');
         }
+
+        return $this->buildBeers($result, false)
+            ->mapToDto();
+    }
+
+    private function buildBeers(array $resultBeers, bool $withDetails): Beer
+    {
+        // Con detalles
+        if ($withDetails) {
+            return Beer::create(
+                $resultBeers['id'],
+                $resultBeers['name'],
+                $resultBeers['description'],
+                BeerDetails::create($resultBeers['tagline'], $resultBeers['first_brewed'], $resultBeers['image_url']),
+            );
+        }
+
+        // Sin detalles
+        return Beer::create($resultBeers['id'], $resultBeers['name'], $resultBeers['description']);
     }
 }

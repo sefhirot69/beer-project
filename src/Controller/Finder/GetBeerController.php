@@ -26,4 +26,14 @@ final class GetBeerController extends AbstractController
             return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
         }
     }
+
+    #[Route('/beer/detail', name: 'app_get_beer_with_detail', methods: ['GET'])]
+    public function withDetail(): JsonResponse
+    {
+        try {
+            return new JsonResponse([], Response::HTTP_OK);
+        } catch (HttpClientException $exception) {
+            return new JsonResponse(['error' => $exception->getMessage()], $exception->getCode());
+        }
+    }
 }

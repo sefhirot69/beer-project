@@ -33,4 +33,21 @@ class GetBeerQueryHandlerTest extends TestCase
         $result = new GetBeerQueryHandler($this->getBeerDS);
         $result();
     }
+
+    /**
+     * @test
+     */
+    public function shouldReturnBeerDtoWithDetail(): void
+    {
+        // GIVEN
+        $beer = BeerMother::randomBeerWithDetail();
+
+        $this->getBeerDS
+            ->expects(self::once())
+            ->method('get')
+            ->willReturn($beer->mapToDto());
+
+        $result = new GetBeerQueryHandler($this->getBeerDS);
+        $result();
+    }
 }

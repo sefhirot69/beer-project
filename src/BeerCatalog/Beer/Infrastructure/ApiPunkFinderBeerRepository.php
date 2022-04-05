@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\BeerCatalog\Beer\Infrastructure;
 
 use App\BeerCatalog\Beer\Application\Find\Query\FindBeerByFoodQuery;
-use App\BeerCatalog\Beer\Domain\Beer;
-use App\BeerCatalog\Beer\Domain\BeerDetails;
 use App\BeerCatalog\Beer\Domain\CatalogBeer;
 use App\BeerCatalog\Beer\Domain\DataSource\FinderBeerDataSource;
 use App\BeerCatalog\Beer\Domain\Dto\CatalogBeerDto;
@@ -15,6 +13,8 @@ use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 
 final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
 {
+    use BeerTrait;
+
     private const ENDPOINT = 'beers';
 
     public function __construct(private HttpClientDataSource $httpClientDataSource, private string $baseUrlApiPunk)
@@ -40,25 +40,5 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
         }
 
         return CatalogBeer::create($this->buildBeers($resultBeers, $query->isWithDetail()))->mapToDto();
-    }
-
-    private function buildBeers(array $resultBeers, bool $withDetails): array
-    {
-        // Con detalles
-        if ($withDetails) {
-            return array_map(static function ($beer) {
-                return Beer::create(
-                    $beer['id'],
-                    $beer['name'],
-                    $beer['description'],
-                    BeerDetails::create($beer['tagline'], $beer['first_brewed'], $beer['image_url']),
-                );
-            }, $resultBeers);
-        }
-
-        // Sin detalles
-        return array_map(static function ($beer) {
-            return Beer::create($beer['id'], $beer['name'], $beer['description']);
-        }, $resultBeers);
     }
 }

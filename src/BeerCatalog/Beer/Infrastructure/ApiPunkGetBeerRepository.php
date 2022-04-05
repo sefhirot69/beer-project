@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\BeerCatalog\Beer\Infrastructure;
 
-use App\BeerCatalog\Beer\Domain\Beer;
-use App\BeerCatalog\Beer\Domain\BeerDetails;
 use App\BeerCatalog\Beer\Domain\DataSource\GetBeerDataSource;
 use App\BeerCatalog\Beer\Domain\Dto\BeerDto;
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
@@ -14,6 +12,8 @@ use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
 
 final class ApiPunkGetBeerRepository implements GetBeerDataSource
 {
+    use BeerTrait;
+
     private const ENDPOINT = 'beers/random';
 
     public function __construct(private HttpClientDataSource $dataSource, private string $baseUrlApiPunk)
@@ -34,25 +34,5 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
         }
 
         return $this->buildBeers($result, false)[0]->mapToDto();
-    }
-
-    private function buildBeers(array $resultBeers, bool $withDetails): array
-    {
-        // Con detalles
-        if ($withDetails) {
-            return array_map(static function ($beer) {
-                return Beer::create(
-                    $beer['id'],
-                    $beer['name'],
-                    $beer['description'],
-                    BeerDetails::create($beer['tagline'], $beer['first_brewed'], $beer['image_url']),
-                );
-            }, $resultBeers);
-        }
-
-        // Sin detalles
-        return array_map(static function ($beer) {
-            return Beer::create($beer['id'], $beer['name'], $beer['description']);
-        }, $resultBeers);
     }
 }

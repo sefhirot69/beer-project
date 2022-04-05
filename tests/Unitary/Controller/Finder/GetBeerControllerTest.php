@@ -77,7 +77,7 @@ class GetBeerControllerTest extends TestCase
         $result = $controller->withDetail();
 
         // THEN
-        self::assertEquals(400, $result->getStatusCode());
+        self::assertEquals(200, $result->getStatusCode());
         self::assertJson($result->getContent());
     }
 

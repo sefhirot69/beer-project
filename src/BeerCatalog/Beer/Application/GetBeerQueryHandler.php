@@ -15,6 +15,6 @@ class GetBeerQueryHandler
 
     public function __invoke(bool $withDetails = false): BeerDto
     {
-        return $this->getBeerDataSource->get();
+        return $this->getBeerDataSource->get($withDetails);
     }
 }

@@ -28,6 +28,7 @@ class GetBeerQueryHandlerTest extends TestCase
         $this->getBeerDS
             ->expects(self::once())
             ->method('get')
+            ->with($this->equalTo(false))
             ->willReturn($beer->mapToDto());
 
         $result = new GetBeerQueryHandler($this->getBeerDS);
@@ -45,6 +46,7 @@ class GetBeerQueryHandlerTest extends TestCase
         $this->getBeerDS
             ->expects(self::once())
             ->method('get')
+            ->with($this->equalTo(false))
             ->willReturn($beer->mapToDto());
 
         $result = new GetBeerQueryHandler($this->getBeerDS);

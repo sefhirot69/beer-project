@@ -33,6 +33,6 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
             throw new BeersNotFoundException('random');
         }
 
-        return $this->buildBeers($result, false)[0]->mapToDto();
+        return $this->buildBeers($result, $withDetail)[0]->mapToDto();
     }
 }

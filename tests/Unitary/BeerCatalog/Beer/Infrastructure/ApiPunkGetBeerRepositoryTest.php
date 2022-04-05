@@ -63,5 +63,28 @@ final class ApiPunkGetBeerRepositoryTest extends TestCase
         $result = $repository->get();
 
         // THEN
+        self::assertNull($result->getDetails());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnBeerDtoWithDetails(): void
+    {
+        // GIVEN
+        $beer = json_decode(ApiPunkResponse::responseBeerOk(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->httpClientMock
+            ->expects(self::once())
+            ->method('fetch')
+            ->willReturn($beer);
+
+        // WHEN
+        $repository = new ApiPunkGetBeerRepository($this->httpClientMock, '');
+        $result = $repository->get(true);
+
+        // THEN
+        self::assertNotNull($result->getDetails());
+
     }
 }

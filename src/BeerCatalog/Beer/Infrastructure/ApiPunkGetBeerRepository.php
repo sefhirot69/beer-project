@@ -16,7 +16,7 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
 {
     private const ENDPOINT = 'beers/random';
 
-    public function __construct(private HttpClientDataSource $dataSource)
+    public function __construct(private HttpClientDataSource $dataSource, private string $baseUrlApiPunk)
     {
     }
 
@@ -26,29 +26,33 @@ final class ApiPunkGetBeerRepository implements GetBeerDataSource
      */
     public function get(): BeerDto
     {
-        $result = $this->dataSource->fetch('GET', self::ENDPOINT, []);
+        $endpoint = $this->baseUrlApiPunk.self::ENDPOINT;
+        $result = $this->dataSource->fetch('GET', $endpoint, []);
 
         if (empty($result)) {
             throw new BeersNotFoundException('random');
         }
 
-        return $this->buildBeers($result, false)
-            ->mapToDto();
+        return $this->buildBeers($result, false)[0]->mapToDto();
     }
 
-    private function buildBeers(array $resultBeers, bool $withDetails): Beer
+    private function buildBeers(array $resultBeers, bool $withDetails): array
     {
         // Con detalles
         if ($withDetails) {
-            return Beer::create(
-                $resultBeers['id'],
-                $resultBeers['name'],
-                $resultBeers['description'],
-                BeerDetails::create($resultBeers['tagline'], $resultBeers['first_brewed'], $resultBeers['image_url']),
-            );
+            return array_map(static function ($beer) {
+                return Beer::create(
+                    $beer['id'],
+                    $beer['name'],
+                    $beer['description'],
+                    BeerDetails::create($beer['tagline'], $beer['first_brewed'], $beer['image_url']),
+                );
+            }, $resultBeers);
         }
 
         // Sin detalles
-        return Beer::create($resultBeers['id'], $resultBeers['name'], $resultBeers['description']);
+        return array_map(static function ($beer) {
+            return Beer::create($beer['id'], $beer['name'], $beer['description']);
+        }, $resultBeers);
     }
 }

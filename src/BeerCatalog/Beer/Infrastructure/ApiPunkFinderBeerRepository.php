@@ -17,13 +17,8 @@ final class ApiPunkFinderBeerRepository implements FinderBeerDataSource
 {
     private const ENDPOINT = 'beers';
 
-    private HttpClientDataSource $httpClientDataSource;
-    private string $baseUrlApiPunk;
-
-    public function __construct(HttpClientDataSource $httpClientDataSource, string $baseUrlApiPunk)
+    public function __construct(private HttpClientDataSource $httpClientDataSource, private string $baseUrlApiPunk)
     {
-        $this->httpClientDataSource = $httpClientDataSource;
-        $this->baseUrlApiPunk = $baseUrlApiPunk;
     }
 
     /**

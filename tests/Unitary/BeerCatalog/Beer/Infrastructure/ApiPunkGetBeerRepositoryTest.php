@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Unitary\BeerCatalog\Beer\Infrastructure;
 
-use App\BeerCatalog\Beer\Domain\Beer;
-use App\BeerCatalog\Beer\Domain\BeerDetails;
 use App\BeerCatalog\Beer\Domain\Exceptions\BeersNotFoundException;
 use App\BeerCatalog\Beer\Infrastructure\ApiPunkGetBeerRepository;
 use App\BeerCatalog\Shared\Domain\HttpClientDataSource;
@@ -43,7 +41,7 @@ final class ApiPunkGetBeerRepositoryTest extends TestCase
 
         // WHEN
 
-        $repository = new ApiPunkGetBeerRepository($this->httpClientMock);
+        $repository = new ApiPunkGetBeerRepository($this->httpClientMock, '');
         $repository->get();
     }
 
@@ -61,7 +59,7 @@ final class ApiPunkGetBeerRepositoryTest extends TestCase
             ->willReturn($beer);
 
         // WHEN
-        $repository = new ApiPunkGetBeerRepository($this->httpClientMock);
+        $repository = new ApiPunkGetBeerRepository($this->httpClientMock, '');
         $result = $repository->get();
 
         // THEN
